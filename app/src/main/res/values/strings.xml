@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Кременчуцьке відділення Полтавської ТПП</string>
+
+    <string name="pref_edit">Загальні</string>
+    <string name="pref_pib_title">П.І.Б.</string>
+    <string name="pref_pib_sum">Введіть ім\'я, що використовуватиметься при оплаті</string>
+    <string name="pref_info">Про програму</string>
+
 </resources>

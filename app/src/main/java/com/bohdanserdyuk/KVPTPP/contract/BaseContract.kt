@@ -44,6 +44,10 @@ interface BaseContract {
     interface MainView: View {
         fun <E> setAdapter(array: Array<E>)
 
+        fun navigateToPreferences()
+
+        fun navigateToPayment()
+
         fun itemClick(i: Int)
 
         fun editClick()

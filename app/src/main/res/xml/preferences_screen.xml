@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/pref_edit">
+
+        <EditTextPreference
+            android:key="@string/pib_key"
+            android:summary="@string/pref_pib_sum"
+            android:title="@string/pref_pib_title"></EditTextPreference>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/pref_info" />
+</PreferenceScreen>
