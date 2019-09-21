@@ -61,6 +61,8 @@ interface BaseContract {
     interface MainView: View {
         fun <E> setAdapter(array: Array<E>)
 
+        fun changeToolbarTitle(id: Int)
+
         fun navigateToPreferences()
 
         fun navigateToPayment()

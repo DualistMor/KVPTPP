@@ -16,8 +16,9 @@ internal class DependencyInjectorImpl : DependencyInjector {
         return context.getSharedPreferences(context.getString(R.string.preferences_location), Context.MODE_PRIVATE)
     }
 
-    override fun mainPresenter(): BaseContract.MainPresenter = MainPresenterImpl()
-
+    override fun mainPresenter(preferencesModel: PreferencesModel): BaseContract.MainPresenter {
+       return MainPresenterImpl(preferencesModel)
+    }
 
     override fun paymentPresenter(preferencesModel: PreferencesModel): BaseContract.PaymentPresenter {
         return PaymentPresenterImpl(preferencesModel)
