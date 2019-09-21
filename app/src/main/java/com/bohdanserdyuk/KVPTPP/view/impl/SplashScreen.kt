@@ -15,7 +15,7 @@ class SplashScreen : AppCompatActivity() {
         setContentView(R.layout.splash_screen)
 
         Handler().postDelayed({
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, OnceShowingScreen::class.java))
             finish()
         }, resources.getInteger(R.integer.splash_delay).toLong())
     }
