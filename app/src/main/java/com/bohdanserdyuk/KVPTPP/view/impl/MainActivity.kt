@@ -17,6 +17,14 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
+    override fun navigateToPreferences() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun navigateToPayment() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun itemClick(i: Int) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
