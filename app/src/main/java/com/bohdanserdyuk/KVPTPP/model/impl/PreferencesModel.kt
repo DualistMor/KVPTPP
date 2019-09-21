@@ -15,6 +15,11 @@ class PreferencesModel(val context: Context, val pref: SharedPreferences, val ed
         get() = get(context.getString(R.string.pib_key), "")
         set(v) = set(context.getString(R.string.pib_key), v)
 
+    var selectedService: String
+        get() = get(context.getString(R.string.selected_service_key), "")
+        set(v) = set(context.getString(R.string.selected_service_key), v)
+
+
     fun set(k: String, v: Long) {
         editor.putLong(k, v).commit()
     }

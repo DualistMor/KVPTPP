@@ -2,11 +2,25 @@
     <string name="app_name">Кременчуцьке відділення Полтавської ТПП</string>
 
     <string name="services">Послуги</string>
+    <string name="payment">Оплата</string>
     <string name="save">Зберегти</string>
     <string name="pref_edit">Загальні</string>
     <string name="pref_pib_title">П.І.Б.</string>
     <string name="pib_example">Гурченко Віктор Генадійович</string>
     <string name="pref_pib_sum">Введіть ім\'я, що використовуватиметься при оплаті</string>
     <string name="pref_info">Про програму</string>
+    <string name="users_pattern">Оплата за %s, від %s</string>
+    <string name="js_insert_pattern">"javascript:(function() { var elements = document.getElementsByClassName(\'textarea paper-input paper-input-\-floating\'); elements[0].innerHTML = \'%s\';})()"</string>
+
+    <string-array name="services_array">
+        <item>Незалежна експертиза та сертифікація</item>
+        <item>Штрихове кодування</item>
+        <item>Переклади з іноземних мов</item>
+        <item>Виставкова та ярмаркова діяльність</item>
+        <item>Презентації, конференції, семінари</item>
+        <item>Конференц-зал</item>
+        <item>Семінари у сфері здійснення державних закупівель</item>
+        <item>Бюро технічної інвентаризації (БТІ)</item>
+    </string-array>
 
 </resources>

@@ -59,17 +59,15 @@ interface BaseContract {
      * Main screen contract
      */
     interface MainView: View {
-        fun <E> setAdapter(array: Array<E>)
+        fun setAdapter(array: Array<Any>)
 
         fun changeToolbarTitle(id: Int)
 
-        fun navigateToPreferences()
-
-        fun navigateToPayment()
+        fun <T : Activity> startActivity(c: Class<T>)
 
         fun itemClick(i: Int)
 
-        fun editClick()
+        fun getServices(): Array<String>
     }
     interface MainPresenter: Presenter<MainView>{
         fun itemClick(i: Int)
@@ -80,11 +78,21 @@ interface BaseContract {
      * Payment screen contract
      */
     interface PaymentView: View {
+        fun changeToolbarTitle(id: Int)
+
+        fun setDisplayHomeAsUpEnabled(b: Boolean)
+
+        fun setDisplayShowHomeEnabled(b: Boolean)
+
         fun loadPage(url: String)
 
-        fun editPage(url: String)
+        fun loadPage(urlResID: Int)
+
+        fun goBackArrow()
     }
     interface PaymentPresenter: Presenter<PaymentView>{
-        fun pageFinished()
+        fun pageFinished(usersPattern: String, jsPattern: String)
+
+        fun onBackButtonPressed()
     }
 }
