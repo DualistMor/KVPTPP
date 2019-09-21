@@ -1,22 +1,32 @@
 package com.bohdanserdyuk.KVPTPP.view.impl
 
-import android.support.v7.app.AppCompatActivity
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import com.bohdanserdyuk.KVPTPP.R
-import android.content.Intent
-import android.support.v4.os.HandlerCompat.postDelayed
-import android.os.Handler
+import com.bohdanserdyuk.KVPTPP.contract.BaseContract
+import com.bohdanserdyuk.KVPTPP.model.impl.PreferencesModel
+import com.bohdanserdyuk.KVPTPP.view.BaseActivity
 
 
-class SplashScreen : AppCompatActivity() {
+class SplashScreen : BaseActivity<BaseContract.SplashView, BaseContract.SplashPresenter>(), BaseContract.SplashView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_screen)
+    }
 
-        Handler().postDelayed({
-            startActivity(Intent(this, OnceShowingScreen::class.java))
-            finish()
-        }, resources.getInteger(R.integer.splash_delay).toLong())
+    override fun resolve(id: Int): Int {
+        return resources.getInteger(id)
+    }
+
+    override fun <T : Activity> startActivity(c: Class<T>) {
+        startActivity(Intent(this, c))
+        finish()
+    }
+
+    override fun initPresenter(): BaseContract.SplashPresenter {
+        val sharedPreferences = dependencyInjector.sharedPreferences(this)
+        return dependencyInjector.splashPresenter(PreferencesModel(this, sharedPreferences, sharedPreferences.edit()))
     }
 }

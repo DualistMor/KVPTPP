@@ -1,9 +1,19 @@
 package com.bohdanserdyuk.KVPTPP.model.impl
 
+import android.content.Context
 import android.content.SharedPreferences
+import com.bohdanserdyuk.KVPTPP.R
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
 
-class PreferencesModel(val pref: SharedPreferences, val editor: SharedPreferences.Editor): BaseContract.Model {
+class PreferencesModel(val context: Context, val pref: SharedPreferences, val editor: SharedPreferences.Editor) : BaseContract.Model {
+
+    var isNewUser: Boolean
+        get() = get(context.getString(R.string.is_new_user_key), true)
+        set(v) = set(context.getString(R.string.is_new_user_key), v)
+
+    var pib: String
+        get() = get(context.getString(R.string.is_new_user_key), "")
+        set(v) = set(context.getString(R.string.is_new_user_key), v)
 
     fun set(k: String, v: Long) {
         editor.putLong(k, v).commit()
@@ -50,6 +60,6 @@ class PreferencesModel(val pref: SharedPreferences, val editor: SharedPreference
     }
 
     override fun onModelDestroy() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        editor.commit()
     }
 }

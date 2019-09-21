@@ -1,3 +1,4 @@
 <resources>
     <string name="pib_key">pib_key</string>
+    <string name="is_new_user_key">is_new_user_key</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.bohdanserdyuk.KVPTPP.contract
 
+import android.app.Activity
 import android.arch.lifecycle.Lifecycle
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -37,7 +38,23 @@ interface BaseContract {
 
         fun onPresenterDestroy()
     }
-
+    /**
+     * Splash screen contract
+     */
+    interface SplashView: View {
+        fun <T : Activity> startActivity(c: Class<T>)
+        fun resolve(id: Int): Int
+    }
+    interface SplashPresenter: Presenter<SplashView>
+    /**
+     * Once screen contract
+     */
+    interface OnceView: View {
+        fun startMainActivity()
+    }
+    interface OncePresenter: Presenter<OnceView> {
+        fun buttonClicked(pib: String)
+    }
     /**
      * Main screen contract
      */

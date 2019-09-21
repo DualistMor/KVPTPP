@@ -25,6 +25,6 @@ class PaymentActivity : BaseActivity<BaseContract.PaymentView, BaseContract.Paym
 
     override fun initPresenter(): BaseContract.PaymentPresenter {
         val sharedPreferences = dependencyInjector.sharedPreferences(this)
-        return dependencyInjector.paymentPresenter(PreferencesModel(sharedPreferences, sharedPreferences.edit()))
+        return dependencyInjector.paymentPresenter(PreferencesModel(this, sharedPreferences, sharedPreferences.edit()))
     }
 }
