@@ -1,0 +1,5 @@
+<resources>
+    <string name="payment_url">https://www.liqpay.ua/ru/checkout/card/i57695751070</string>
+    <!--Preferences location-->
+    <string name="preferences_location">com.bohdanserdyuk.KVPTPP.preferences</string>
+</resources>
