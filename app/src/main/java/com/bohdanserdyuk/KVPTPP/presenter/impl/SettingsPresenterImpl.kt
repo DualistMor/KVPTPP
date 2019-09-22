@@ -5,6 +5,7 @@ import com.bohdanserdyuk.KVPTPP.R
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
 import com.bohdanserdyuk.KVPTPP.model.impl.PreferencesModel
 import com.bohdanserdyuk.KVPTPP.presenter.BasePresenter
+import com.bohdanserdyuk.KVPTPP.presenter.interactor.use_case.CorrectFullNameUseCase
 import com.bohdanserdyuk.KVPTPP.view.impl.MainActivity
 import com.bohdanserdyuk.KVPTPP.view.impl.OnceShowingScreen
 
@@ -24,6 +25,10 @@ class SettingsPresenterImpl(val preferencesModel: PreferencesModel): BasePresent
 
     override fun sendFeedbackClicked() {
         view.sendFeedback()
+    }
+
+    override fun isFullNameCorrectUA(str: String): Boolean {
+        return CorrectFullNameUseCase().isFullNameCorrectUA(str)
     }
 
     override fun onBackButtonPressed() {

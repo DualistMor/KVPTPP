@@ -51,6 +51,7 @@ interface BaseContract {
      */
     interface OnceView : View {
         fun startMainActivity()
+        fun showWrongPibToast()
     }
 
     interface OncePresenter : Presenter<OnceView> {
@@ -89,6 +90,7 @@ interface BaseContract {
         fun loadPage(urlResID: Int)
 
         fun goBack()
+        fun hideProgressBar()
     }
 
     interface PaymentPresenter : Presenter<PaymentView> {
@@ -98,7 +100,7 @@ interface BaseContract {
     }
 
     /**
-     * Preferences screen contract
+     * Settings screen contract
      */
     interface PreferencesView : View {
 
@@ -119,5 +121,6 @@ interface BaseContract {
 
         fun sendFeedbackClicked()
         fun onBackButtonPressed()
+        fun isFullNameCorrectUA(toString: String): Boolean
     }
 }

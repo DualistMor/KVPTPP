@@ -19,6 +19,7 @@ class PaymentPresenterImpl(val preferencesModel: PreferencesModel) : BasePresent
     override fun pageFinished(usersPattern: String, jsPattern: String) {
         val preferencesModel = getModel(PreferencesModel::class.java)
         view.loadPage(JsFormatterUseCase().formatJsWithUsersInfo(usersPattern, jsPattern, preferencesModel.selectedService, preferencesModel.pib))
+        view.hideProgressBar()
     }
 
     override fun onBackButtonPressed() {

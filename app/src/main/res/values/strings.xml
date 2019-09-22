@@ -8,6 +8,7 @@
     <string name="website">Сайт</string>
     <string name="save">Зберегти</string>
     <string name="pref_edit">Загальні</string>
+    <string name="wrong_pib">Некоректний П.І.Б</string>
     <string name="pref_pib_title">П.І.Б.</string>
     <string name="pib_example">Гурченко Віктор Генадійович</string>
     <string name="pref_pib_sum">Введіть ім\'я, що використовуватиметься при оплаті</string>

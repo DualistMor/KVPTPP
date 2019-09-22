@@ -1,17 +1,19 @@
 package com.bohdanserdyuk.KVPTPP.view.impl
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.preference.EditTextPreference
 import android.preference.Preference
 import android.preference.PreferenceFragment
 import android.preference.PreferenceScreen
+import android.widget.Toast
 import com.bohdanserdyuk.KVPTPP.BuildConfig
 import com.bohdanserdyuk.KVPTPP.R
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
 import com.bohdanserdyuk.KVPTPP.model.impl.PreferencesModel
 import com.bohdanserdyuk.KVPTPP.view.BaseActivity
 import kotlinx.android.synthetic.main.settings_screen.*
-import android.net.Uri
 
 
 class SettingsActivity : BaseActivity<BaseContract.PreferencesView, BaseContract.PreferencesPresenter>(), BaseContract.PreferencesView {
@@ -57,10 +59,21 @@ class SettingsActivity : BaseActivity<BaseContract.PreferencesView, BaseContract
         appsVersion.text = String.format(getString(R.string.version_char), BuildConfig.VERSION_NAME)
     }
 
+
     inner class MyPreferenceFragment : PreferenceFragment() {
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             addPreferencesFromResource(R.xml.preferences_screen)
+
+            var editPref: EditTextPreference = preferenceScreen.findPreference(getString(R.string.pib_key)) as EditTextPreference
+            editPref.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
+                if (presenter.isFullNameCorrectUA(newValue.toString()))
+                    true
+                else {
+                    Toast.makeText(activity, getString(R.string.wrong_pib), Toast.LENGTH_LONG).show()
+                    false
+                }
+            }
         }
 
         override fun onPreferenceTreeClick(preferenceScreen: PreferenceScreen?, preference: Preference?): Boolean {

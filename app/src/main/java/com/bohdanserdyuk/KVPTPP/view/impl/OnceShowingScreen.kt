@@ -4,6 +4,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import com.bohdanserdyuk.KVPTPP.R
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
 import com.bohdanserdyuk.KVPTPP.model.impl.PreferencesModel
@@ -26,6 +27,10 @@ class OnceShowingScreen : BaseActivity<BaseContract.OnceView, BaseContract.OnceP
     override fun startMainActivity() {
         startActivity(Intent(this, MainActivity::class.java))
         finish()
+    }
+
+    override fun showWrongPibToast() {
+        Toast.makeText(this, getString(R.string.wrong_pib), Toast.LENGTH_LONG).show()
     }
 
     override fun initPresenter(): BaseContract.OncePresenter {
