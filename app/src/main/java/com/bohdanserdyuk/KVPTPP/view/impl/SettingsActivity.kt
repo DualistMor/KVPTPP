@@ -20,7 +20,7 @@ class SettingsActivity : BaseActivity<BaseContract.PreferencesView, BaseContract
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_screen)
-        fragmentManager.beginTransaction().replace(R.id.content, MyPreferenceFragment()).commit()
+        fragmentManager.beginTransaction().replace(R.id.content, MyPreferenceFragment(presenter)).commit()
     }
 
     override fun setDisplayHomeAsUpEnabled(b: Boolean) {
@@ -57,32 +57,6 @@ class SettingsActivity : BaseActivity<BaseContract.PreferencesView, BaseContract
 
     override fun setVersionName() {
         appsVersion.text = String.format(getString(R.string.version_char), BuildConfig.VERSION_NAME)
-    }
-
-
-    inner class MyPreferenceFragment : PreferenceFragment() {
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            addPreferencesFromResource(R.xml.preferences_screen)
-
-            var editPref: EditTextPreference = preferenceScreen.findPreference(getString(R.string.pib_key)) as EditTextPreference
-            editPref.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
-                if (presenter.isFullNameCorrectUA(newValue.toString()))
-                    true
-                else {
-                    Toast.makeText(activity, getString(R.string.wrong_pib), Toast.LENGTH_LONG).show()
-                    false
-                }
-            }
-        }
-
-        override fun onPreferenceTreeClick(preferenceScreen: PreferenceScreen?, preference: Preference?): Boolean {
-            when (preference!!.key) {
-                getString(R.string.website_key) -> presenter.startWebsiteClicked()
-                getString(R.string.feedback_key) -> presenter.sendFeedbackClicked()
-            }
-            return true
-        }
     }
 
     override fun initPresenter(): BaseContract.PreferencesPresenter {

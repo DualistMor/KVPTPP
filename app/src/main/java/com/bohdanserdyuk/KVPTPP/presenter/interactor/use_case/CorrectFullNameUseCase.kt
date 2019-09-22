@@ -3,7 +3,7 @@ package com.bohdanserdyuk.KVPTPP.presenter.interactor.use_case
 import java.util.regex.Pattern
 
 class CorrectFullNameUseCase {
-    val nRex ="[А-ЯІЇЄҐ]{1}[а-яіїєґ]+"
+    val nRex ="[А-ЯІЇЄҐ]{1}[а-яіїєґ'`]+"
 
     /**
      * matches example: Григорій Саввич Сковорода, Григорій Саввич-Квітка Сковорода
