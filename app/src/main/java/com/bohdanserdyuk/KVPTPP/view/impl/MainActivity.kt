@@ -29,10 +29,6 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
         servicesRecycler.adapter = ServicesRecyclerAdapter(this, array, layoutInflater)
     }
 
-    override fun changeToolbarTitle(id: Int) {
-        supportActionBar?.title = getString(id)
-    }
-
     override fun <T : Activity> startActivity(c: Class<T>) {
         startActivity(Intent(this, c))
     }

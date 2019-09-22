@@ -21,9 +21,12 @@
         </activity>
         <activity android:name=".view.impl.OnceShowingScreen"
             android:theme="@style/splashScreenTheme"/>
-        <activity android:name=".view.impl.MainActivity" >
-        </activity>
-        <activity android:name=".view.impl.PaymentActivity" />
+        <activity android:name=".view.impl.MainActivity"
+            android:label="@string/services"/>
+        <activity android:name=".view.impl.PaymentActivity"
+            android:label="@string/payment"/>
+        <activity android:name=".view.impl.SettingsActivity"
+            android:label="@string/editing"/>
     </application>
 
 </manifest>

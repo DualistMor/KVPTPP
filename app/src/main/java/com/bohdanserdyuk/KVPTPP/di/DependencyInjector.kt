@@ -15,5 +15,6 @@ internal interface DependencyInjector {
 
     fun emptyModelsArray(): Array<BaseContract.Model>
     fun preferencesModelArray(preferencesModel: PreferencesModel): Array<BaseContract.Model>
+    fun settingsPresenter(preferencesModel: PreferencesModel): BaseContract.PreferencesPresenter
 
 }

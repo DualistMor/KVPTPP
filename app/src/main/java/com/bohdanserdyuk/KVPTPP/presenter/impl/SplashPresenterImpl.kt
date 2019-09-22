@@ -13,7 +13,10 @@ class SplashPresenterImpl(val preferencesModel: PreferencesModel): BasePresenter
     override fun onCreate() {
         super.onCreate()
         Handler().postDelayed({
-            view.startActivity(if (getModel(PreferencesModel::class.java).isNewUser) OnceShowingScreen::class.java else MainActivity::class.java)
+            view.startActivity(if (getModel(PreferencesModel::class.java).isNewUser)
+                OnceShowingScreen::class.java
+            else
+                MainActivity::class.java)
         }, view.resolve(R.integer.splash_delay).toLong())
     }
 

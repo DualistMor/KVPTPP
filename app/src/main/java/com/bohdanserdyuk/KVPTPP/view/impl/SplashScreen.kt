@@ -20,7 +20,7 @@ class SplashScreen : BaseActivity<BaseContract.SplashView, BaseContract.SplashPr
         return resources.getInteger(id)
     }
 
-    override fun <T : Activity> startActivity(c: Class<T>) {
+    override fun <T > startActivity(c: Class<T>) {
         startActivity(Intent(this, c))
         finish()
     }

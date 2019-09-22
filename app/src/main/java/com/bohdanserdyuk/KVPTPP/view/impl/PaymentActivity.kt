@@ -33,10 +33,6 @@ class PaymentActivity : BaseActivity<BaseContract.PaymentView, BaseContract.Paym
         }
     }
 
-    override fun changeToolbarTitle(id: Int) {
-        supportActionBar?.title = getString(id)
-    }
-
     override fun setDisplayHomeAsUpEnabled(b: Boolean) {
         supportActionBar?.setDisplayHomeAsUpEnabled(b)
     }
@@ -58,7 +54,7 @@ class PaymentActivity : BaseActivity<BaseContract.PaymentView, BaseContract.Paym
         return true
     }
 
-    override fun goBackArrow() {
+    override fun goBack() {
         onBackPressed()
     }
 

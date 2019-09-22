@@ -2,9 +2,7 @@ package com.bohdanserdyuk.KVPTPP.contract
 
 import android.app.Activity
 import android.arch.lifecycle.Lifecycle
-import android.content.SharedPreferences
 import android.os.Bundle
-import com.bohdanserdyuk.KVPTPP.model.impl.PreferencesModel
 
 interface BaseContract {
     interface Model {
@@ -38,30 +36,32 @@ interface BaseContract {
 
         fun onPresenterDestroy()
     }
+
     /**
      * Splash screen contract
      */
-    interface SplashView: View {
-        fun <T : Activity> startActivity(c: Class<T>)
+    interface SplashView : View {
+        fun <T> startActivity(c: Class<T>)
         fun resolve(id: Int): Int
     }
-    interface SplashPresenter: Presenter<SplashView>
+
+    interface SplashPresenter : Presenter<SplashView>
     /**
      * Once screen contract
      */
-    interface OnceView: View {
+    interface OnceView : View {
         fun startMainActivity()
     }
-    interface OncePresenter: Presenter<OnceView> {
+
+    interface OncePresenter : Presenter<OnceView> {
         fun buttonClicked(pib: String)
     }
+
     /**
      * Main screen contract
      */
-    interface MainView: View {
+    interface MainView : View {
         fun setAdapter(array: Array<Any>)
-
-        fun changeToolbarTitle(id: Int)
 
         fun <T : Activity> startActivity(c: Class<T>)
 
@@ -69,17 +69,17 @@ interface BaseContract {
 
         fun getServices(): Array<String>
     }
-    interface MainPresenter: Presenter<MainView>{
+
+    interface MainPresenter : Presenter<MainView> {
         fun itemClick(i: Int)
 
         fun editClick()
     }
+
     /**
      * Payment screen contract
      */
-    interface PaymentView: View {
-        fun changeToolbarTitle(id: Int)
-
+    interface PaymentView : View {
         fun setDisplayHomeAsUpEnabled(b: Boolean)
 
         fun setDisplayShowHomeEnabled(b: Boolean)
@@ -88,11 +88,36 @@ interface BaseContract {
 
         fun loadPage(urlResID: Int)
 
-        fun goBackArrow()
+        fun goBack()
     }
-    interface PaymentPresenter: Presenter<PaymentView>{
+
+    interface PaymentPresenter : Presenter<PaymentView> {
         fun pageFinished(usersPattern: String, jsPattern: String)
 
+        fun onBackButtonPressed()
+    }
+
+    /**
+     * Preferences screen contract
+     */
+    interface PreferencesView : View {
+
+        fun setDisplayHomeAsUpEnabled(b: Boolean)
+
+        fun setDisplayShowHomeEnabled(b: Boolean)
+
+        fun startWebsite()
+
+        fun sendFeedback()
+
+        fun setVersionName()
+        fun goBack()
+    }
+
+    interface PreferencesPresenter : Presenter<PreferencesView> {
+        fun startWebsiteClicked()
+
+        fun sendFeedbackClicked()
         fun onBackButtonPressed()
     }
 }

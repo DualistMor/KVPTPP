@@ -3,6 +3,9 @@
 
     <string name="services">Послуги</string>
     <string name="payment">Оплата</string>
+    <string name="editing">Редагування</string>
+    <string name="feedback">Відгук</string>
+    <string name="website">Сайт</string>
     <string name="save">Зберегти</string>
     <string name="pref_edit">Загальні</string>
     <string name="pref_pib_title">П.І.Б.</string>
@@ -11,6 +14,10 @@
     <string name="pref_info">Про програму</string>
     <string name="users_pattern">Оплата за %s, від %s</string>
     <string name="js_insert_pattern">"javascript:(function() { var elements = document.getElementsByClassName(\'textarea paper-input paper-input-\-floating\'); elements[0].innerHTML = \'%s\';})()"</string>
+    <string name="version_char">v.%s</string>
+
+    <string name="feedback_subject">КВПТПП Android app report</string>
+    <string name="feedback_mail_body">Шановний розробнику, </string>
 
     <string-array name="services_array">
         <item>Незалежна експертиза та сертифікація</item>

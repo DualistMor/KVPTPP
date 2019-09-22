@@ -1,24 +1,29 @@
 package com.bohdanserdyuk.KVPTPP.presenter.impl
 
+import android.os.Handler
 import com.bohdanserdyuk.KVPTPP.R
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
 import com.bohdanserdyuk.KVPTPP.model.impl.PreferencesModel
 import com.bohdanserdyuk.KVPTPP.presenter.BasePresenter
-import com.bohdanserdyuk.KVPTPP.presenter.interactor.use_case.JsFormatterUseCase
+import com.bohdanserdyuk.KVPTPP.view.impl.MainActivity
+import com.bohdanserdyuk.KVPTPP.view.impl.OnceShowingScreen
 
-class PaymentPresenterImpl(val preferencesModel: PreferencesModel) : BasePresenter<BaseContract.PaymentView>(), BaseContract.PaymentPresenter {
+class SettingsPresenterImpl(val preferencesModel: PreferencesModel): BasePresenter<BaseContract.PreferencesView>(), BaseContract.PreferencesPresenter {
 
     override fun onCreate() {
         super.onCreate()
+        view.setVersionName()
+
         view.setDisplayHomeAsUpEnabled(true)
         view.setDisplayShowHomeEnabled(true)
-
-        view.loadPage(R.string.payment_url)
     }
 
-    override fun pageFinished(usersPattern: String, jsPattern: String) {
-        val preferencesModel = getModel(PreferencesModel::class.java)
-        view.loadPage(JsFormatterUseCase().formatJsWithUsersInfo(usersPattern, jsPattern, preferencesModel.selectedService, preferencesModel.pib))
+    override fun startWebsiteClicked() {
+        view.startWebsite()
+    }
+
+    override fun sendFeedbackClicked() {
+        view.sendFeedback()
     }
 
     override fun onBackButtonPressed() {

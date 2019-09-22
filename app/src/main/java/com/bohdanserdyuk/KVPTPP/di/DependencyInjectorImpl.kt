@@ -2,18 +2,16 @@ package com.bohdanserdyuk.KVPTPP.di
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.preference.PreferenceManager
 import com.bohdanserdyuk.KVPTPP.R
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
 import com.bohdanserdyuk.KVPTPP.model.impl.PreferencesModel
-import com.bohdanserdyuk.KVPTPP.presenter.impl.MainPresenterImpl
-import com.bohdanserdyuk.KVPTPP.presenter.impl.OncePresenterImpl
-import com.bohdanserdyuk.KVPTPP.presenter.impl.PaymentPresenterImpl
-import com.bohdanserdyuk.KVPTPP.presenter.impl.SplashPresenterImpl
+import com.bohdanserdyuk.KVPTPP.presenter.impl.*
 
 internal class DependencyInjectorImpl : DependencyInjector {
 
     override fun sharedPreferences(context: Context): SharedPreferences {
-        return context.getSharedPreferences(context.getString(R.string.preferences_location), Context.MODE_PRIVATE)
+        return PreferenceManager.getDefaultSharedPreferences(context)
     }
 
     override fun mainPresenter(preferencesModel: PreferencesModel): BaseContract.MainPresenter {
@@ -22,6 +20,10 @@ internal class DependencyInjectorImpl : DependencyInjector {
 
     override fun paymentPresenter(preferencesModel: PreferencesModel): BaseContract.PaymentPresenter {
         return PaymentPresenterImpl(preferencesModel)
+    }
+
+    override fun settingsPresenter(preferencesModel: PreferencesModel): BaseContract.PreferencesPresenter {
+        return SettingsPresenterImpl(preferencesModel)
     }
 
     override fun splashPresenter(preferencesModel: PreferencesModel): BaseContract.SplashPresenter {
