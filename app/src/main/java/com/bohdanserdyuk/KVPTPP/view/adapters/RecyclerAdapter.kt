@@ -39,4 +39,6 @@ class ServicesRecyclerAdapter(val view: BaseContract.MainView,
             view.itemClick(index)
         }
     }
+
+
 }

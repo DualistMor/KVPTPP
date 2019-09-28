@@ -19,6 +19,10 @@
 
     <string name="feedback_subject">КВПТПП Android app report</string>
     <string name="feedback_mail_body">Шановний розробнику, </string>
+    <string name="sum_to_pay">Сума до сплати</string>
+    <string name="_50">50</string>
+    <string name="_100">100</string>
+    <string name="_500">500</string>
 
     <string-array name="services_array">
         <item>Незалежна експертиза та сертифікація</item>
