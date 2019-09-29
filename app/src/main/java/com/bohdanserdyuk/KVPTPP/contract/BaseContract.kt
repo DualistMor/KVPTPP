@@ -3,6 +3,8 @@ package com.bohdanserdyuk.KVPTPP.contract
 import android.app.Activity
 import android.arch.lifecycle.Lifecycle
 import android.os.Bundle
+import com.bohdanserdyuk.KVPTPP.model.entity.ServiceData
+import com.bohdanserdyuk.KVPTPP.presenter.entity.Service
 
 interface BaseContract {
     interface Model {
@@ -62,17 +64,15 @@ interface BaseContract {
      * Main screen contract
      */
     interface MainView : View {
-        fun setAdapter(array: Array<Any>)
+        fun setAdapter(list: List<Service>)
 
         fun <T : Activity> startActivity(c: Class<T>)
 
-        fun itemClick(i: Int)
-
-        fun getServices(): Array<String>
+        fun itemClick(s: Service)
     }
 
     interface MainPresenter : Presenter<MainView> {
-        fun itemClick(i: Int)
+        fun itemClick(s: Service)
 
         fun editClick()
     }

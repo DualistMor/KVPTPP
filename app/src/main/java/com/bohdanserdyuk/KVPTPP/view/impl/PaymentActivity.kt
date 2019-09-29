@@ -8,20 +8,26 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import com.bohdanserdyuk.KVPTPP.KVPTPPAplication
 import com.bohdanserdyuk.KVPTPP.R
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
-import com.bohdanserdyuk.KVPTPP.model.impl.PreferencesModel
+import com.bohdanserdyuk.KVPTPP.model.repository.ServicesModel
+import com.bohdanserdyuk.KVPTPP.model.repository.impl.PreferencesModelImpl
 import com.bohdanserdyuk.KVPTPP.view.BaseActivity
 import com.bohdanserdyuk.KVPTPP.view.heplers.PermissionChecker
 import kotlinx.android.synthetic.main.payment_view.*
-import android.webkit.WebChromeClient
+import javax.inject.Inject
 
 
 class PaymentActivity : BaseActivity<BaseContract.PaymentView, BaseContract.PaymentPresenter>(), BaseContract.PaymentView {
     var PERMISSIONS = arrayOf(Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE)
     var PERMISSION_ALL = 1
 
+    @Inject
+    lateinit var servicesModel: ServicesModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        (application as KVPTPPAplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.payment_view)
 
@@ -85,6 +91,6 @@ class PaymentActivity : BaseActivity<BaseContract.PaymentView, BaseContract.Paym
 
     override fun initPresenter(): BaseContract.PaymentPresenter {
         val sharedPreferences = dependencyInjector.sharedPreferences(this)
-        return dependencyInjector.paymentPresenter(PreferencesModel(this, sharedPreferences, sharedPreferences.edit()))
+        return dependencyInjector.paymentPresenter(PreferencesModelImpl(this, sharedPreferences, sharedPreferences.edit()), servicesModel)
     }
 }

@@ -3,15 +3,10 @@ package com.bohdanserdyuk.KVPTPP.view.impl
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.preference.EditTextPreference
-import android.preference.Preference
-import android.preference.PreferenceFragment
-import android.preference.PreferenceScreen
-import android.widget.Toast
 import com.bohdanserdyuk.KVPTPP.BuildConfig
 import com.bohdanserdyuk.KVPTPP.R
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
-import com.bohdanserdyuk.KVPTPP.model.impl.PreferencesModel
+import com.bohdanserdyuk.KVPTPP.model.repository.impl.PreferencesModelImpl
 import com.bohdanserdyuk.KVPTPP.view.BaseActivity
 import kotlinx.android.synthetic.main.settings_screen.*
 
@@ -61,7 +56,7 @@ class SettingsActivity : BaseActivity<BaseContract.PreferencesView, BaseContract
 
     override fun initPresenter(): BaseContract.PreferencesPresenter {
         val sharedPreferences = dependencyInjector.sharedPreferences(this)
-        return dependencyInjector.settingsPresenter(PreferencesModel(this, sharedPreferences, sharedPreferences.edit()))
+        return dependencyInjector.settingsPresenter(PreferencesModelImpl(this, sharedPreferences, sharedPreferences.edit()))
 
     }
 

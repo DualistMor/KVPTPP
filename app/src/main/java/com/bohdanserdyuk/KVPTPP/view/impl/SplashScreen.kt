@@ -1,11 +1,10 @@
 package com.bohdanserdyuk.KVPTPP.view.impl
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import com.bohdanserdyuk.KVPTPP.R
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
-import com.bohdanserdyuk.KVPTPP.model.impl.PreferencesModel
+import com.bohdanserdyuk.KVPTPP.model.repository.impl.PreferencesModelImpl
 import com.bohdanserdyuk.KVPTPP.view.BaseActivity
 
 
@@ -27,6 +26,6 @@ class SplashScreen : BaseActivity<BaseContract.SplashView, BaseContract.SplashPr
 
     override fun initPresenter(): BaseContract.SplashPresenter {
         val sharedPreferences = dependencyInjector.sharedPreferences(this)
-        return dependencyInjector.splashPresenter(PreferencesModel(this, sharedPreferences, sharedPreferences.edit()))
+        return dependencyInjector.splashPresenter(PreferencesModelImpl(this, sharedPreferences, sharedPreferences.edit()))
     }
 }

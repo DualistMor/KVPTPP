@@ -3,7 +3,7 @@
     <string name="website_key">website_key</string>
     <string name="feedback_key">feedback_key</string>
 
-    <string name="selected_service_key">selected_service_key</string>
+    <string name="selected_service_id_key">selected_service_key</string>
 
     <string name="is_new_user_key">is_new_user_key</string>
 </resources>

@@ -1,11 +1,13 @@
 package com.bohdanserdyuk.KVPTPP.di
 
+import android.arch.persistence.room.Room
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
-import com.bohdanserdyuk.KVPTPP.R
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
-import com.bohdanserdyuk.KVPTPP.model.impl.PreferencesModel
+import com.bohdanserdyuk.KVPTPP.model.db.LocalDatabase
+import com.bohdanserdyuk.KVPTPP.model.repository.ServicesModel
+import com.bohdanserdyuk.KVPTPP.model.repository.impl.PreferencesModelImpl
 import com.bohdanserdyuk.KVPTPP.presenter.impl.*
 
 internal class DependencyInjectorImpl : DependencyInjector {
@@ -14,31 +16,36 @@ internal class DependencyInjectorImpl : DependencyInjector {
         return PreferenceManager.getDefaultSharedPreferences(context)
     }
 
-    override fun mainPresenter(preferencesModel: PreferencesModel): BaseContract.MainPresenter {
-       return MainPresenterImpl(preferencesModel)
+    override fun mainPresenter(preferencesModelImpl: PreferencesModelImpl, servicesModel: ServicesModel): BaseContract.MainPresenter {
+       return MainPresenterImpl(preferencesModelImpl, servicesModel)
     }
 
-    override fun paymentPresenter(preferencesModel: PreferencesModel): BaseContract.PaymentPresenter {
-        return PaymentPresenterImpl(preferencesModel)
+    override fun paymentPresenter(preferencesModelImpl: PreferencesModelImpl, servicesModel: ServicesModel): BaseContract.PaymentPresenter {
+        return PaymentPresenterImpl(preferencesModelImpl, servicesModel)
     }
 
-    override fun settingsPresenter(preferencesModel: PreferencesModel): BaseContract.PreferencesPresenter {
-        return SettingsPresenterImpl(preferencesModel)
+    override fun settingsPresenter(preferencesModelImpl: PreferencesModelImpl): BaseContract.PreferencesPresenter {
+        return SettingsPresenterImpl(preferencesModelImpl)
     }
 
-    override fun splashPresenter(preferencesModel: PreferencesModel): BaseContract.SplashPresenter {
-        return SplashPresenterImpl(preferencesModel)
+    override fun splashPresenter(preferencesModelImpl: PreferencesModelImpl): BaseContract.SplashPresenter {
+        return SplashPresenterImpl(preferencesModelImpl)
     }
 
-    override fun oncePresenter(preferencesModel: PreferencesModel): BaseContract.OncePresenter {
-        return OncePresenterImpl(preferencesModel)
+    override fun oncePresenter(preferencesModelImpl: PreferencesModelImpl): BaseContract.OncePresenter {
+        return OncePresenterImpl(preferencesModelImpl)
+    }
+
+    override fun roomLocalDatabase(context: Context): LocalDatabase {
+        return Room.databaseBuilder(context,
+            LocalDatabase::class.java, "database").build()
     }
 
     override fun emptyModelsArray(): Array<BaseContract.Model> {
         return arrayOfNulls<BaseContract.Model>(0) as Array<BaseContract.Model>
     }
 
-    override fun preferencesModelArray(preferencesModel: PreferencesModel): Array<BaseContract.Model> {
-        return arrayOf(preferencesModel)
+    override fun preferencesModelArray(preferencesModelImpl: PreferencesModelImpl): Array<BaseContract.Model> {
+        return arrayOf(preferencesModelImpl)
     }
 }

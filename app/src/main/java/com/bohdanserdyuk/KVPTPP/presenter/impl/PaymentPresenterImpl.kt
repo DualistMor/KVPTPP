@@ -2,11 +2,16 @@ package com.bohdanserdyuk.KVPTPP.presenter.impl
 
 import com.bohdanserdyuk.KVPTPP.R
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
-import com.bohdanserdyuk.KVPTPP.model.impl.PreferencesModel
+import com.bohdanserdyuk.KVPTPP.model.entity.mapper.ServiceDataToServiceMapper
+import com.bohdanserdyuk.KVPTPP.model.repository.ServicesModel
+import com.bohdanserdyuk.KVPTPP.model.repository.impl.PreferencesModelImpl
 import com.bohdanserdyuk.KVPTPP.presenter.BasePresenter
 import com.bohdanserdyuk.KVPTPP.presenter.interactor.use_case.JsFormatterUseCase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
-class PaymentPresenterImpl(val preferencesModel: PreferencesModel) : BasePresenter<BaseContract.PaymentView>(), BaseContract.PaymentPresenter {
+class PaymentPresenterImpl(val preferencesModelImpl: PreferencesModelImpl, val servicesModel: ServicesModel) : BasePresenter<BaseContract.PaymentView>(), BaseContract.PaymentPresenter {
 
     override fun onCreate() {
         super.onCreate()
@@ -17,8 +22,16 @@ class PaymentPresenterImpl(val preferencesModel: PreferencesModel) : BasePresent
     }
 
     override fun pageFinished(usersPattern: String, jsPattern: String) {
-        val preferencesModel = getModel(PreferencesModel::class.java)
-        view.loadPage(JsFormatterUseCase().formatJsWithUsersInfo(usersPattern, jsPattern, preferencesModel.selectedService, preferencesModel.pib))
+        val preferencesModel = getModel(PreferencesModelImpl::class.java)
+        GlobalScope.launch(Dispatchers.Main) {
+            view.loadPage(JsFormatterUseCase()
+                .formatJsWithUsersInfo(usersPattern,
+                    jsPattern,
+                    ServiceDataToServiceMapper().mapServiceDataToService(servicesModel.read(preferencesModel.selectedService)!!).title,
+                    preferencesModel.pib
+                )
+            )
+        }
         view.hideProgressBar()
     }
 
@@ -27,6 +40,6 @@ class PaymentPresenterImpl(val preferencesModel: PreferencesModel) : BasePresent
     }
 
     override fun initModels(): Array<BaseContract.Model> {
-        return dependencyInjector.preferencesModelArray(preferencesModel)
+        return dependencyInjector.preferencesModelArray(preferencesModelImpl)
     }
 }

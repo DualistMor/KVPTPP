@@ -1,11 +1,12 @@
-package com.bohdanserdyuk.KVPTPP.model.impl
+package com.bohdanserdyuk.KVPTPP.model.repository.impl
 
 import android.content.Context
 import android.content.SharedPreferences
 import com.bohdanserdyuk.KVPTPP.R
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
+import com.bohdanserdyuk.KVPTPP.model.repository.PreferencesModel
 
-class PreferencesModel(val context: Context, val pref: SharedPreferences, val editor: SharedPreferences.Editor) : BaseContract.Model {
+class PreferencesModelImpl(val context: Context, val pref: SharedPreferences, val editor: SharedPreferences.Editor) : BaseContract.Model, PreferencesModel {
 
     var isNewUser: Boolean
         get() = get(context.getString(R.string.is_new_user_key), true)
@@ -15,9 +16,9 @@ class PreferencesModel(val context: Context, val pref: SharedPreferences, val ed
         get() = get(context.getString(R.string.pib_key), "")
         set(v) = set(context.getString(R.string.pib_key), v)
 
-    var selectedService: String
-        get() = get(context.getString(R.string.selected_service_key), "")
-        set(v) = set(context.getString(R.string.selected_service_key), v)
+    var selectedService: Int
+        get() = get(context.getString(R.string.selected_service_id_key), 0)
+        set(v) = set(context.getString(R.string.selected_service_id_key), v)
 
 
     fun set(k: String, v: Long) {
