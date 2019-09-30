@@ -5,4 +5,9 @@
     <integer name="splash_delay">1000</integer>
 
     <string name="feedback_email">bohdanserdyuk@gmail.com</string>
+
+
+    <string name="js_ammount_pattern">"javascript:(function() { var elements = document.getElementsByClassName(\'input input__amount\'); elements[0].innerHTML = \'%s\';})()"</string>
+    <string name="js_insert_pattern">"javascript:(function() { var elements = document.getElementsByClassName(\'textarea paper-input paper-input-\-floating\'); elements[0].innerHTML = \'%s\';})()"</string>
+    <string name="version_char">v.%s</string>
 </resources>

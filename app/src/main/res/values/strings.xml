@@ -14,8 +14,6 @@
     <string name="pref_pib_sum">Введіть ім\'я, що використовуватиметься при оплаті</string>
     <string name="pref_info">Про програму</string>
     <string name="users_pattern">Оплата за %s, від %s</string>
-    <string name="js_insert_pattern">"javascript:(function() { var elements = document.getElementsByClassName(\'textarea paper-input paper-input-\-floating\'); elements[0].innerHTML = \'%s\';})()"</string>
-    <string name="version_char">v.%s</string>
 
     <string name="feedback_subject">КВПТПП Android app report</string>
     <string name="feedback_mail_body">Шановний розробнику, </string>

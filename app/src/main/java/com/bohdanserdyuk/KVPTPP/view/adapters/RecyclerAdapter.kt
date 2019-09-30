@@ -2,14 +2,16 @@ package com.bohdanserdyuk.KVPTPP.view.adapters
 
 import android.animation.ObjectAnimator
 import android.support.v7.widget.RecyclerView
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.bohdanserdyuk.KVPTPP.R
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
-import com.bohdanserdyuk.KVPTPP.model.entity.ServiceData
 import com.bohdanserdyuk.KVPTPP.presenter.entity.Service
 import kotlinx.android.synthetic.main.service_item.view.*
 
@@ -28,7 +30,7 @@ class ServicesRecyclerAdapter(val view: BaseContract.MainView,
         p0.bind(p1)
     }
 
-    inner class ServicesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    inner class ServicesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener, TextWatcher {
         private var index = 0
         private val title: TextView = itemView.service_title
         private val editText: EditText = itemView.sum
@@ -36,6 +38,11 @@ class ServicesRecyclerAdapter(val view: BaseContract.MainView,
         init {
             itemView.expand_arrow.setOnClickListener(this)
             itemView.setOnClickListener(this)
+            editText.addTextChangedListener(this)
+            val preloadedContainer = itemView.preloaded_value_buttons
+            for (i in 0 until preloadedContainer.childCount) {
+                preloadedContainer.getChildAt(i).setOnClickListener(this)
+            }
         }
 
         fun bind(index: Int) {
@@ -47,8 +54,25 @@ class ServicesRecyclerAdapter(val view: BaseContract.MainView,
         override fun onClick(v: View?) {
             when (v!!.id) {
                 R.id.expand_arrow -> animateViewHolder()
+                R.id.value_button_1,
+                R.id.value_button_2,
+                R.id.value_button_3 -> {
+                    editText.setText((v as Button).text)
+                }
                 else -> view.itemClick(items[index])
             }
+        }
+
+        override fun afterTextChanged(s: Editable) {
+        }
+
+        override fun beforeTextChanged(s: CharSequence, start: Int,
+                                       count: Int, after: Int) {
+        }
+
+        override fun onTextChanged(s: CharSequence, start: Int,
+                                   before: Int, count: Int) {
+            items[index].money = s.toString()
         }
 
         private fun animateViewHolder() {
