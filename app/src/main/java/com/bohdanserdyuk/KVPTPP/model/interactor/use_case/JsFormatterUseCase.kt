@@ -1,4 +1,4 @@
-package com.bohdanserdyuk.KVPTPP.presenter.interactor.use_case
+package com.bohdanserdyuk.KVPTPP.model.interactor.use_case
 
 class JsFormatterUseCase {
     fun formatJsWithUsersInfo(usersPattern: String, jsPattern: String, selectedService: String, pib: String): String {

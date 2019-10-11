@@ -1,21 +1,28 @@
 package com.bohdanserdyuk.KVPTPP.di
 
-import com.bohdanserdyuk.KVPTPP.di.modules.ContextModule
-import com.bohdanserdyuk.KVPTPP.di.modules.DatabaseModule
-import com.bohdanserdyuk.KVPTPP.di.modules.DatasourceModule
-import com.bohdanserdyuk.KVPTPP.di.modules.ModelsModule
-import com.bohdanserdyuk.KVPTPP.view.impl.MainActivity
-import com.bohdanserdyuk.KVPTPP.view.impl.PaymentActivity
+import com.bohdanserdyuk.KVPTPP.di.modules.*
+import com.bohdanserdyuk.KVPTPP.presenter.impl.*
+import com.bohdanserdyuk.KVPTPP.view.impl.*
 import dagger.Component
 import javax.inject.Singleton
 
 @Component(modules = [ContextModule::class,
     DatabaseModule::class,
     DatasourceModule::class,
-    ModelsModule::class])
+    ModelsModule::class,
+    PresentersModule::class])
 @Singleton
 interface AppComponent {
     fun inject(activity: MainActivity)
     fun inject(activity: PaymentActivity)
+    fun inject(fragment: MyPreferenceFragment)
+    fun inject(activity: OnceShowingScreen)
+    fun inject(activity: SettingsActivity)
+    fun inject(activity: SplashScreen)
 
+    fun inject(presenter: MainPresenterImpl)
+    fun inject(presenter: PaymentPresenterImpl)
+    fun inject(presenter: SettingsPresenterImpl)
+    fun inject(presenter: OncescreenPresenterImpl)
+    fun inject(presenter: SplashPresenterImpl)
 }

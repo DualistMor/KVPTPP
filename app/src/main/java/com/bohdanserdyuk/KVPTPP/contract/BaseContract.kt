@@ -3,12 +3,15 @@ package com.bohdanserdyuk.KVPTPP.contract
 import android.app.Activity
 import android.arch.lifecycle.Lifecycle
 import android.os.Bundle
-import com.bohdanserdyuk.KVPTPP.model.entity.ServiceData
 import com.bohdanserdyuk.KVPTPP.presenter.entity.Service
 
 interface BaseContract {
     interface Model {
         fun onModelDestroy()
+    }
+
+    interface Models {
+        val models: Array<Model>
     }
 
     interface View
@@ -30,8 +33,6 @@ interface BaseContract {
 
         fun detachView()
 
-        fun initModels(): Array<Model>
-
         fun <T : Model> getModel(modelClass: Class<T>): Model
 
         fun detachModels()
@@ -48,6 +49,8 @@ interface BaseContract {
     }
 
     interface SplashPresenter : Presenter<SplashView>
+
+    interface SplashModel: Models
     /**
      * Once screen contract
      */
@@ -60,6 +63,7 @@ interface BaseContract {
         fun buttonClicked(pib: String)
     }
 
+    interface OnceModel: Models
     /**
      * Main screen contract
      */
@@ -77,6 +81,7 @@ interface BaseContract {
         fun editClick()
     }
 
+    interface MainModel: Models
     /**
      * Payment screen contract
      */
@@ -99,10 +104,12 @@ interface BaseContract {
         fun onBackButtonPressed()
     }
 
+    interface PaymentModel: Models
+
     /**
      * Settings screen contract
      */
-    interface PreferencesView : View {
+    interface SettingsView : View {
 
         fun setDisplayHomeAsUpEnabled(b: Boolean)
 
@@ -116,11 +123,13 @@ interface BaseContract {
         fun goBack()
     }
 
-    interface PreferencesPresenter : Presenter<PreferencesView> {
+    interface SettingsPresenter : Presenter<SettingsView> {
         fun startWebsiteClicked()
 
         fun sendFeedbackClicked()
         fun onBackButtonPressed()
         fun isFullNameCorrectUA(toString: String): Boolean
     }
+
+    interface SettingsModel: Models
 }

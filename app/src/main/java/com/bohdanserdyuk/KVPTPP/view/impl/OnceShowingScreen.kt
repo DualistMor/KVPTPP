@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import com.bohdanserdyuk.KVPTPP.KVPTPPAplication
 import com.bohdanserdyuk.KVPTPP.R
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
 import com.bohdanserdyuk.KVPTPP.model.repository.impl.PreferencesModelImpl
@@ -13,6 +14,7 @@ import kotlinx.android.synthetic.main.once_showing_screen.*
 class OnceShowingScreen : BaseActivity<BaseContract.OnceView, BaseContract.OncePresenter>(), BaseContract.OnceView, View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        (application as KVPTPPAplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.once_showing_screen)
 
@@ -30,10 +32,5 @@ class OnceShowingScreen : BaseActivity<BaseContract.OnceView, BaseContract.OnceP
 
     override fun showWrongPibToast() {
         Toast.makeText(this, getString(R.string.wrong_pib), Toast.LENGTH_LONG).show()
-    }
-
-    override fun initPresenter(): BaseContract.OncePresenter {
-        val sharedPreferences = dependencyInjector.sharedPreferences(this)
-        return dependencyInjector.oncePresenter(PreferencesModelImpl(this, sharedPreferences, sharedPreferences.edit()))
     }
 }

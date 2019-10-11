@@ -1,11 +1,12 @@
 package com.bohdanserdyuk.KVPTPP.presenter.impl
 
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
-import com.bohdanserdyuk.KVPTPP.model.repository.impl.PreferencesModelImpl
 import com.bohdanserdyuk.KVPTPP.presenter.BasePresenter
-import com.bohdanserdyuk.KVPTPP.presenter.interactor.use_case.CorrectFullNameUseCase
+import com.bohdanserdyuk.KVPTPP.model.interactor.use_case.CorrectFullNameUseCase
+import com.bohdanserdyuk.KVPTPP.model.repository.PreferencesModel
+import javax.inject.Inject
 
-class SettingsPresenterImpl(val preferencesModelImpl: PreferencesModelImpl): BasePresenter<BaseContract.PreferencesView>(), BaseContract.PreferencesPresenter {
+class SettingsPresenterImpl @Inject constructor(model: BaseContract.SettingsModel) : BasePresenter<BaseContract.SettingsView, BaseContract.SettingsModel>(model), BaseContract.SettingsPresenter {
 
     override fun onCreate() {
         super.onCreate()
@@ -29,9 +30,5 @@ class SettingsPresenterImpl(val preferencesModelImpl: PreferencesModelImpl): Bas
 
     override fun onBackButtonPressed() {
         view.goBack()
-    }
-
-    override fun initModels(): Array<BaseContract.Model> {
-        return dependencyInjector.preferencesModelArray(preferencesModelImpl)
     }
 }

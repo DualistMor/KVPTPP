@@ -18,8 +18,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresenter>(), BaseContract.MainView, View.OnClickListener {
-    @Inject
-    lateinit var servicesModel: ServicesModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as KVPTPPAplication).appComponent.inject(this)
@@ -44,11 +42,5 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
 
     override fun onClick(v: View?) {
         presenter.editClick()
-    }
-
-    override fun initPresenter(): BaseContract.MainPresenter {
-        val sharedPreferences = dependencyInjector.sharedPreferences(this)
-        return dependencyInjector.mainPresenter(PreferencesModelImpl(this, sharedPreferences, sharedPreferences.edit()), servicesModel)
-
     }
 }

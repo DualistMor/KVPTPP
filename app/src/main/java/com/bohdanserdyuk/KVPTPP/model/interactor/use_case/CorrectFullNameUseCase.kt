@@ -1,4 +1,4 @@
-package com.bohdanserdyuk.KVPTPP.presenter.interactor.use_case
+package com.bohdanserdyuk.KVPTPP.model.interactor.use_case
 
 import java.util.regex.Pattern
 

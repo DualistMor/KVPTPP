@@ -88,9 +88,4 @@ class PaymentActivity : BaseActivity<BaseContract.PaymentView, BaseContract.Paym
     override fun goBack() {
         onBackPressed()
     }
-
-    override fun initPresenter(): BaseContract.PaymentPresenter {
-        val sharedPreferences = dependencyInjector.sharedPreferences(this)
-        return dependencyInjector.paymentPresenter(PreferencesModelImpl(this, sharedPreferences, sharedPreferences.edit()), servicesModel)
-    }
 }

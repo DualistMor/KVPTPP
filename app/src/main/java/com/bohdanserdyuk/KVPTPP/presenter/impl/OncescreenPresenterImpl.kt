@@ -3,9 +3,11 @@ package com.bohdanserdyuk.KVPTPP.presenter.impl
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
 import com.bohdanserdyuk.KVPTPP.model.repository.impl.PreferencesModelImpl
 import com.bohdanserdyuk.KVPTPP.presenter.BasePresenter
-import com.bohdanserdyuk.KVPTPP.presenter.interactor.use_case.CorrectFullNameUseCase
+import com.bohdanserdyuk.KVPTPP.model.interactor.use_case.CorrectFullNameUseCase
+import com.bohdanserdyuk.KVPTPP.model.repository.PreferencesModel
+import javax.inject.Inject
 
-class OncePresenterImpl(val preferencesModelImpl: PreferencesModelImpl) : BasePresenter<BaseContract.OnceView>(), BaseContract.OncePresenter {
+class OncescreenPresenterImpl @Inject constructor(model: BaseContract.OnceModel) : BasePresenter<BaseContract.OnceView, BaseContract.OnceModel>(model), BaseContract.OncePresenter {
 
     override fun buttonClicked(pib: String) {
         if (CorrectFullNameUseCase().isFullNameCorrectUA(pib)) {
@@ -14,9 +16,5 @@ class OncePresenterImpl(val preferencesModelImpl: PreferencesModelImpl) : BasePr
         } else {
             view.showWrongPibToast()
         }
-    }
-
-    override fun initModels(): Array<BaseContract.Model> {
-        return dependencyInjector.preferencesModelArray(preferencesModelImpl)
     }
 }

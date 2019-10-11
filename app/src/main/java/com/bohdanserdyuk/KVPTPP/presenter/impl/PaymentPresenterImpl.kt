@@ -6,12 +6,14 @@ import com.bohdanserdyuk.KVPTPP.model.entity.mapper.ServiceDataToServiceMapper
 import com.bohdanserdyuk.KVPTPP.model.repository.ServicesModel
 import com.bohdanserdyuk.KVPTPP.model.repository.impl.PreferencesModelImpl
 import com.bohdanserdyuk.KVPTPP.presenter.BasePresenter
-import com.bohdanserdyuk.KVPTPP.presenter.interactor.use_case.JsFormatterUseCase
+import com.bohdanserdyuk.KVPTPP.model.interactor.use_case.JsFormatterUseCase
+import com.bohdanserdyuk.KVPTPP.model.repository.PreferencesModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class PaymentPresenterImpl(val preferencesModelImpl: PreferencesModelImpl, val servicesModel: ServicesModel) : BasePresenter<BaseContract.PaymentView>(), BaseContract.PaymentPresenter {
+class PaymentPresenterImpl @Inject constructor(model: BaseContract.PaymentModel) : BasePresenter<BaseContract.PaymentView, BaseContract.PaymentModel>(model), BaseContract.PaymentPresenter {
 
     override fun onCreate() {
         super.onCreate()
@@ -27,7 +29,7 @@ class PaymentPresenterImpl(val preferencesModelImpl: PreferencesModelImpl, val s
             view.loadPage(JsFormatterUseCase()
                 .formatJsWithUsersInfo(usersPattern,
                     jsPattern,
-                    ServiceDataToServiceMapper().mapServiceDataToService(servicesModel.read(preferencesModel.selectedService)!!).title,
+                    ServiceDataToServiceMapper().mapServiceDataToService(getModel(ServicesModel::class.java).read(preferencesModel.selectedService)!!).title,
                     preferencesModel.pib
                 )
             )
@@ -37,9 +39,5 @@ class PaymentPresenterImpl(val preferencesModelImpl: PreferencesModelImpl, val s
 
     override fun onBackButtonPressed() {
         view.goBack()
-    }
-
-    override fun initModels(): Array<BaseContract.Model> {
-        return dependencyInjector.preferencesModelArray(preferencesModelImpl)
     }
 }

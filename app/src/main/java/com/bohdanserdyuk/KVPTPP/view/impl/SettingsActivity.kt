@@ -4,15 +4,16 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import com.bohdanserdyuk.KVPTPP.BuildConfig
+import com.bohdanserdyuk.KVPTPP.KVPTPPAplication
 import com.bohdanserdyuk.KVPTPP.R
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
-import com.bohdanserdyuk.KVPTPP.model.repository.impl.PreferencesModelImpl
 import com.bohdanserdyuk.KVPTPP.view.BaseActivity
 import kotlinx.android.synthetic.main.settings_screen.*
 
 
-class SettingsActivity : BaseActivity<BaseContract.PreferencesView, BaseContract.PreferencesPresenter>(), BaseContract.PreferencesView {
+class SettingsActivity : BaseActivity<BaseContract.SettingsView, BaseContract.SettingsPresenter>(), BaseContract.SettingsView {
     override fun onCreate(savedInstanceState: Bundle?) {
+        (application as KVPTPPAplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_screen)
         fragmentManager.beginTransaction().replace(R.id.content, MyPreferenceFragment(presenter)).commit()
@@ -53,11 +54,4 @@ class SettingsActivity : BaseActivity<BaseContract.PreferencesView, BaseContract
     override fun setVersionName() {
         appsVersion.text = String.format(getString(R.string.version_char), BuildConfig.VERSION_NAME)
     }
-
-    override fun initPresenter(): BaseContract.PreferencesPresenter {
-        val sharedPreferences = dependencyInjector.sharedPreferences(this)
-        return dependencyInjector.settingsPresenter(PreferencesModelImpl(this, sharedPreferences, sharedPreferences.edit()))
-
-    }
-
 }

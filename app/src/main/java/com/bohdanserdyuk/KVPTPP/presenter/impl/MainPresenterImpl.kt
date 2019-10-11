@@ -4,8 +4,10 @@ import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
 import com.bohdanserdyuk.KVPTPP.model.entity.mapper.ServiceDataToServiceMapper
+import com.bohdanserdyuk.KVPTPP.model.repository.PreferencesModel
 import com.bohdanserdyuk.KVPTPP.model.repository.ServicesModel
 import com.bohdanserdyuk.KVPTPP.model.repository.impl.PreferencesModelImpl
+import com.bohdanserdyuk.KVPTPP.model.repository.impl.ServicesModelImpl
 import com.bohdanserdyuk.KVPTPP.presenter.BasePresenter
 import com.bohdanserdyuk.KVPTPP.presenter.entity.Service
 import com.bohdanserdyuk.KVPTPP.view.impl.PaymentActivity
@@ -13,13 +15,17 @@ import com.bohdanserdyuk.KVPTPP.view.impl.SettingsActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainPresenterImpl(val preferencesModelImpl: PreferencesModelImpl, val servicesModel: ServicesModel) : BasePresenter<BaseContract.MainView>(), BaseContract.MainPresenter {
+class MainPresenterImpl @Inject constructor(model: BaseContract.MainModel) : BasePresenter<BaseContract.MainView, BaseContract.MainModel>(model), BaseContract.MainPresenter {
 
     lateinit var services: List<Service>
+    lateinit var servicesModel: ServicesModel
 
     override fun onCreate() {
         super.onCreate()
+
+        servicesModel = getModel(ServicesModelImpl::class.java)
         getModel(PreferencesModelImpl::class.java).isNewUser = false
 
         GlobalScope.launch(Dispatchers.Main) {
@@ -47,9 +53,5 @@ class MainPresenterImpl(val preferencesModelImpl: PreferencesModelImpl, val serv
 
     override fun editClick() {
         view.startActivity(SettingsActivity::class.java)
-    }
-
-    override fun initModels(): Array<BaseContract.Model> {
-        return dependencyInjector.preferencesModelArray(preferencesModelImpl)
     }
 }

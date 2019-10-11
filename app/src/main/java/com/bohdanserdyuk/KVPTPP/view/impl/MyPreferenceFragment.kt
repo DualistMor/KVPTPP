@@ -10,10 +10,12 @@ import com.bohdanserdyuk.KVPTPP.R
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
 
 class MyPreferenceFragment() : PreferenceFragment() {
-    lateinit var presenter: BaseContract.PreferencesPresenter
-    constructor( presenter: BaseContract.PreferencesPresenter) : this() {
+    lateinit var presenter: BaseContract.SettingsPresenter
+
+    constructor(presenter: BaseContract.SettingsPresenter) : this() {
         this.presenter = presenter
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         addPreferencesFromResource(R.xml.preferences_screen)

@@ -10,29 +10,35 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract;
-import com.bohdanserdyuk.KVPTPP.di.DependencyInjector;
-import com.bohdanserdyuk.KVPTPP.di.DependencyInjectorImpl;
 import com.bohdanserdyuk.KVPTPP.view.BaseActivity;
 import com.bohdanserdyuk.KVPTPP.viewModel.BaseModelViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
-public abstract class BasePresenter<V extends BaseContract.View> implements LifecycleObserver, BaseContract.Presenter<V> {
+import javax.inject.Inject;
+
+public abstract class BasePresenter<V extends BaseContract.View, M extends BaseContract.Models> implements LifecycleObserver, BaseContract.Presenter<V> {
 
     private V view;
-    private BaseContract.Model[] models;
+    public M model;
     private Bundle stateBundle;
-    public DependencyInjector dependencyInjector = new DependencyInjectorImpl();
+
+    public BasePresenter(M model) {
+        this.model = model;
+    }
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_CREATE)
     public void onCreate() {
-        BaseModelViewModel<BaseContract.Model> modelViewModel = ((view instanceof Fragment)
+        BaseModelViewModel<M> modelViewModel = ((view instanceof Fragment)
             ? ViewModelProviders.of((Fragment) view)
             : ViewModelProviders.of((BaseActivity) view)).get(BaseModelViewModel.class);
         if (modelViewModel.getModels() == null) {
-            modelViewModel.setModels(initModels());
+            modelViewModel.setModels(model);
         }
-        models = modelViewModel.getModels();
+        else {
+            model = modelViewModel.getModels();
+        }
+        model = modelViewModel.getModels();
     }
 
     @Override
@@ -42,7 +48,7 @@ public abstract class BasePresenter<V extends BaseContract.View> implements Life
 
     @Override
     final public <T extends BaseContract.Model> T getModel(@NonNull Class<T> modelClass) {
-        for (BaseContract.Model m : models) {
+        for (BaseContract.Model m : model.getModels()) {
             if (modelClass.isInstance(m)) {
                 return (T) m;
             }
@@ -53,7 +59,7 @@ public abstract class BasePresenter<V extends BaseContract.View> implements Life
     @NotNull
     @Override
     final public BaseContract.Model[] getModels() {
-        return models;
+        return model.getModels();
     }
 
     @Override
@@ -77,11 +83,8 @@ public abstract class BasePresenter<V extends BaseContract.View> implements Life
     }
 
     @Override
-    public abstract BaseContract.Model[] initModels();
-
-    @Override
     final public void detachModels() {
-        models = null;
+        model = null;
     }
 
     @Override

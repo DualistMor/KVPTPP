@@ -12,12 +12,14 @@ import com.bohdanserdyuk.KVPTPP.di.DependencyInjector;
 import com.bohdanserdyuk.KVPTPP.di.DependencyInjectorImpl;
 import com.lucky_apps.RainViewer.viewLayer.viewModel.BasePresenterViewModel;
 
+import javax.inject.Inject;
+
 public abstract class BaseActivity<V extends BaseContract.View, P extends BaseContract.Presenter<V>> extends AppCompatActivity implements BaseContract.View {
 
     private final LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
-    public final DependencyInjector dependencyInjector = new DependencyInjectorImpl();
 
-    protected P presenter;
+    @Inject
+    public P presenter;
 
     @CallSuper
     @Override
@@ -26,9 +28,11 @@ public abstract class BaseActivity<V extends BaseContract.View, P extends BaseCo
         BasePresenterViewModel<V, P> presenterViewModel =
             ViewModelProviders.of(this).get(BasePresenterViewModel.class);
         if (presenterViewModel.getPresenter() == null) {
-            presenterViewModel.setPresenter(initPresenter());
+            presenterViewModel.setPresenter(presenter);
         }
-        presenter = presenterViewModel.getPresenter();
+        else {
+            presenter = presenterViewModel.getPresenter();
+        }
         presenter.attachLifecycle(getLifecycle());
         presenter.attachView((V)this);
     }
@@ -47,5 +51,4 @@ public abstract class BaseActivity<V extends BaseContract.View, P extends BaseCo
         presenter.detachModels();
     }
 
-    protected abstract P initPresenter();
 }

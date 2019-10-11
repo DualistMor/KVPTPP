@@ -18,9 +18,6 @@
     <string name="feedback_subject">КВПТПП Android app report</string>
     <string name="feedback_mail_body">Шановний розробнику, </string>
     <string name="sum_to_pay">Сума до сплати</string>
-    <string name="_50">50</string>
-    <string name="_100">100</string>
-    <string name="_500">500</string>
 
     <string-array name="services_array">
         <item>Незалежна експертиза та сертифікація</item>
@@ -31,6 +28,11 @@
         <item>Конференц-зал</item>
         <item>Семінари у сфері здійснення державних закупівель</item>
         <item>Бюро технічної інвентаризації (БТІ)</item>
+        <item>Оцінка житлової нерухомості</item>
+        <item>Оцінка земельних ділянок</item>
+        <item>Послуги технічної інвентаризації</item>
+        <item>Оцінка обладнання</item>
+        <item>Оцінка транспортних засобів</item>
     </string-array>
 
 </resources>

@@ -1,4 +1,4 @@
-package com.bohdanserdyuk.KVPTPP.presenter.interactor
+package com.bohdanserdyuk.KVPTPP.model.interactor
 
 class StringToAnyMapper {
     fun toAnyArray(array: Array<String>): Array<Any> {
