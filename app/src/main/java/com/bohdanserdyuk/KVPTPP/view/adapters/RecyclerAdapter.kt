@@ -16,7 +16,7 @@ import com.bohdanserdyuk.KVPTPP.presenter.entity.Service
 import kotlinx.android.synthetic.main.service_item.view.*
 
 
-class ServicesRecyclerAdapter(val view: BaseContract.MainView,
+class ServicesRecyclerAdapter(val view: BaseContract.ServicesView,
                               val items: List<Service>,
                               private val layoutInflater: LayoutInflater) : RecyclerView.Adapter<ServicesRecyclerAdapter.ServicesViewHolder>() {
 

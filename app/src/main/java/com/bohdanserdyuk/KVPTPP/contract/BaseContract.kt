@@ -65,9 +65,9 @@ interface BaseContract {
 
     interface OnceModel: Models
     /**
-     * Main screen contract
+     * Services screen contract
      */
-    interface MainView : View {
+    interface ServicesView : View {
         fun setAdapter(list: List<Service>)
 
         fun <T : Activity> startActivity(c: Class<T>)
@@ -75,13 +75,13 @@ interface BaseContract {
         fun itemClick(s: Service)
     }
 
-    interface MainPresenter : Presenter<MainView> {
+    interface ServicesPresenter : Presenter<ServicesView> {
         fun itemClick(s: Service)
 
         fun editClick()
     }
 
-    interface MainModel: Models
+    interface ServicesModel: Models
     /**
      * Payment screen contract
      */

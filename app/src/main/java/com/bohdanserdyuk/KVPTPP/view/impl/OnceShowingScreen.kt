@@ -7,7 +7,6 @@ import android.widget.Toast
 import com.bohdanserdyuk.KVPTPP.KVPTPPAplication
 import com.bohdanserdyuk.KVPTPP.R
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
-import com.bohdanserdyuk.KVPTPP.model.repository.impl.PreferencesModelImpl
 import com.bohdanserdyuk.KVPTPP.view.BaseActivity
 import kotlinx.android.synthetic.main.once_showing_screen.*
 

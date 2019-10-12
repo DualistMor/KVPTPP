@@ -40,8 +40,8 @@ class ModelsModule {
     }
 
     @Provides
-    fun provideMainModel(preferencesModel: PreferencesModel, servicesModel: ServicesModel): BaseContract.MainModel {
-        return object : BaseContract.MainModel {
+    fun provideMainModel(preferencesModel: PreferencesModel, servicesModel: ServicesModel): BaseContract.ServicesModel {
+        return object : BaseContract.ServicesModel {
             override val models: Array<BaseContract.Model>
                 get() = arrayOf(preferencesModel, servicesModel)
         }

@@ -1,46 +1,71 @@
 package com.bohdanserdyuk.KVPTPP.view.impl
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.view.View
-import com.bohdanserdyuk.KVPTPP.KVPTPPAplication
+import android.support.design.widget.FloatingActionButton
+import android.support.design.widget.Snackbar
+import android.support.v4.view.GravityCompat
+import android.support.v7.app.ActionBarDrawerToggle
+import android.view.MenuItem
+import android.support.v4.widget.DrawerLayout
+import android.support.design.widget.NavigationView
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
+import android.view.Menu
 import com.bohdanserdyuk.KVPTPP.R
-import com.bohdanserdyuk.KVPTPP.contract.BaseContract
-import com.bohdanserdyuk.KVPTPP.model.entity.ServiceData
-import com.bohdanserdyuk.KVPTPP.model.repository.ServicesModel
-import com.bohdanserdyuk.KVPTPP.model.repository.impl.PreferencesModelImpl
-import com.bohdanserdyuk.KVPTPP.presenter.entity.Service
-import com.bohdanserdyuk.KVPTPP.view.BaseActivity
-import com.bohdanserdyuk.KVPTPP.view.adapters.ServicesRecyclerAdapter
-import kotlinx.android.synthetic.main.activity_main.*
-import javax.inject.Inject
 
-class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresenter>(), BaseContract.MainView, View.OnClickListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as KVPTPPAplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
 
-        floatingActionButton.setOnClickListener(this)
-        servicesRecycler.layoutManager = LinearLayoutManager(this)
+        val fab: FloatingActionButton = findViewById(R.id.floatingActionButton)
+        fab.setOnClickListener { view ->
+            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show()
+        }
+        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
+        val navView: NavigationView = findViewById(R.id.nav_view)
+        val toggle = ActionBarDrawerToggle(
+            this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        navView.setNavigationItemSelectedListener(this)
     }
 
-    override fun setAdapter(list: List<Service>) {
-        servicesRecycler.adapter = ServicesRecyclerAdapter(this, list, layoutInflater)
+    override fun onBackPressed() {
+        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
     }
 
-    override fun <T : Activity> startActivity(c: Class<T>) {
-        startActivity(Intent(this, c))
-    }
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        // Handle navigation view item clicks here.
+        when (item.itemId) {
+            R.id.nav_services -> {
+                // Handle the camera action
+            }
+            R.id.nav_request -> {
 
-    override fun itemClick(s: Service) {
-        presenter.itemClick(s)
-    }
+            }
+            R.id.nav_about_us -> {
 
-    override fun onClick(v: View?) {
-        presenter.editClick()
+            }
+            R.id.nav_feedback -> {
+
+            }
+            R.id.nav_share -> {
+
+            }
+        }
+        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
+        drawerLayout.closeDrawer(GravityCompat.START)
+        return true
     }
 }

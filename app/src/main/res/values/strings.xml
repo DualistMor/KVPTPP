@@ -19,6 +19,21 @@
     <string name="feedback_mail_body">Шановний розробнику, </string>
     <string name="sum_to_pay">Сума до сплати</string>
 
+    <string name="title_activity_main">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_services">Послуги</string>
+    <string name="menu_request">Заявка</string>
+    <string name="menu_about">Про нас</string>
+    <string name="menu_feedback">Зворотній зв\'язок</string>
+    <string name="communicate">Комунікації</string>
+    <string name="menu_share">Поділитися</string>
+
     <string-array name="services_array">
         <item>Незалежна експертиза та сертифікація</item>
         <item>Штрихове кодування</item>
@@ -34,5 +49,4 @@
         <item>Оцінка обладнання</item>
         <item>Оцінка транспортних засобів</item>
     </string-array>
-
 </resources>

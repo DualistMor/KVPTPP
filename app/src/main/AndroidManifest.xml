@@ -3,16 +3,20 @@
     package="com.bohdanserdyuk.KVPTPP">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:allowBackup="true"
         android:name=".KVPTPPAplication"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".view.impl.MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".view.impl.SplashScreen"
             android:theme="@style/splashScreenTheme">
@@ -22,14 +26,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.impl.OnceShowingScreen"
-            android:theme="@style/splashScreenTheme"/>
-        <activity android:name=".view.impl.MainActivity"
-            android:label="@string/services"/>
-        <activity android:name=".view.impl.PaymentActivity"
-            android:label="@string/payment"/>
-        <activity android:name=".view.impl.SettingsActivity"
-            android:label="@string/editing"/>
+        <activity
+            android:name=".view.impl.OnceShowingScreen"
+            android:theme="@style/splashScreenTheme" />
+        <activity
+            android:name=".view.impl.ServicesActivity"
+            android:label="@string/services" />
+        <activity
+            android:name=".view.impl.PaymentActivity"
+            android:label="@string/payment" />
+        <activity
+            android:name=".view.impl.SettingsActivity"
+            android:label="@string/editing" />
     </application>
 
 </manifest>

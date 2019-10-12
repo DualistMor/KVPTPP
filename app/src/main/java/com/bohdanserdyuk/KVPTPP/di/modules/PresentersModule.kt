@@ -1,8 +1,6 @@
 package com.bohdanserdyuk.KVPTPP.di.modules
 
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
-import com.bohdanserdyuk.KVPTPP.model.repository.PreferencesModel
-import com.bohdanserdyuk.KVPTPP.model.repository.ServicesModel
 import com.bohdanserdyuk.KVPTPP.presenter.impl.*
 import dagger.Module
 import dagger.Provides
@@ -10,8 +8,8 @@ import dagger.Provides
 @Module
 class PresentersModule {
     @Provides
-    fun provideMainPresenter(model: BaseContract.MainModel): BaseContract.MainPresenter {
-        return MainPresenterImpl(model)
+    fun provideMainPresenter(model: BaseContract.ServicesModel): BaseContract.ServicesPresenter {
+        return ServicesPresenterImpl(model)
     }
 
     @Provides
