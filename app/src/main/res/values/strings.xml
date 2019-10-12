@@ -16,7 +16,7 @@
     <string name="users_pattern">Оплата за %s, від %s</string>
 
     <string name="feedback_subject">КВПТПП Android app report</string>
-    <string name="feedback_mail_body">Шановний розробнику, </string>
+    <string name="feedback_mail_body">Шановний представнику Кременчуцького відділення Полтавської ТПП, </string>
     <string name="sum_to_pay">Сума до сплати</string>
 
     <string name="title_activity_main">MainActivity</string>
@@ -49,4 +49,7 @@
         <item>Оцінка обладнання</item>
         <item>Оцінка транспортних засобів</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -30,10 +30,10 @@
             android:name=".view.impl.OnceShowingScreen"
             android:theme="@style/splashScreenTheme" />
         <activity
-            android:name=".view.impl.ServicesActivity"
+            android:name=".view.impl.ServicesFragment"
             android:label="@string/services" />
         <activity
-            android:name=".view.impl.PaymentActivity"
+            android:name=".view.impl.PaymentFragment"
             android:label="@string/payment" />
         <activity
             android:name=".view.impl.SettingsActivity"

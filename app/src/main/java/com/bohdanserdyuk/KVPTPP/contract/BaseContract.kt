@@ -46,10 +46,25 @@ interface BaseContract {
      */
     interface MainView : View {
         fun animateChangeFragment(id: Int)
+
+        fun launchMainWebsite()
+
+        fun sendFeedback()
+
+        fun startPayment()
+
+        fun launchRequestWebsite()
+
+        fun shareApp()
+        fun startMainFragment(id: Int)
     }
 
     interface MainPresenter : Presenter<MainView> {
         fun itemSelected(id: Int)
+
+        fun startPayment()
+
+        fun startMainFragment()
     }
 
     interface MainModel: Models
@@ -86,9 +101,13 @@ interface BaseContract {
         fun <T : Activity> startActivity(c: Class<T>)
 
         fun itemClick(s: Service)
+
+        fun startFragment(m: Any)
     }
 
     interface ServicesPresenter : Presenter<ServicesView> {
+        fun onCreateView()
+
         fun itemClick(s: Service)
 
         fun editClick()
@@ -99,22 +118,17 @@ interface BaseContract {
      * Payment screen contract
      */
     interface PaymentView : View {
-        fun setDisplayHomeAsUpEnabled(b: Boolean)
-
-        fun setDisplayShowHomeEnabled(b: Boolean)
-
         fun loadPage(url: String)
 
         fun loadPage(urlResID: Int)
 
-        fun goBack()
         fun hideProgressBar()
     }
 
     interface PaymentPresenter : Presenter<PaymentView> {
-        fun pageFinished(usersPattern: String, jsPattern: String)
+        fun onCreateView()
 
-        fun onBackButtonPressed()
+        fun pageFinished(usersPattern: String, jsPattern: String)
     }
 
     interface PaymentModel: Models

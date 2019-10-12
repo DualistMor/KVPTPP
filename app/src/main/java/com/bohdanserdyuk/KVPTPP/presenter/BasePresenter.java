@@ -15,8 +15,6 @@ import com.bohdanserdyuk.KVPTPP.viewModel.BaseModelViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
-import javax.inject.Inject;
-
 public abstract class BasePresenter<V extends BaseContract.View, M extends BaseContract.Models> implements LifecycleObserver, BaseContract.Presenter<V> {
 
     private V view;

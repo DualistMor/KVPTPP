@@ -21,6 +21,10 @@
     <item android:title="@string/communicate">
         <menu>
             <item
+                android:id="@+id/nav_website"
+                android:icon="@drawable/ic_web_black_24dp"
+                android:title="@string/website" />
+            <item
                 android:id="@+id/nav_feedback"
                 android:icon="@drawable/ic_feedback_black_24dp"
                 android:title="@string/menu_feedback" />

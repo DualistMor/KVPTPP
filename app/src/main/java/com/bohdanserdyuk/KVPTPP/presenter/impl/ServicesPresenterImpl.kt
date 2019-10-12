@@ -2,6 +2,7 @@ package com.bohdanserdyuk.KVPTPP.presenter.impl
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
+import com.bohdanserdyuk.KVPTPP.broker.StartPayment
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
 import com.bohdanserdyuk.KVPTPP.model.entity.mapper.ServiceDataToServiceMapper
 import com.bohdanserdyuk.KVPTPP.model.repository.ServicesModel
@@ -9,7 +10,7 @@ import com.bohdanserdyuk.KVPTPP.model.repository.impl.PreferencesModelImpl
 import com.bohdanserdyuk.KVPTPP.model.repository.impl.ServicesModelImpl
 import com.bohdanserdyuk.KVPTPP.presenter.BasePresenter
 import com.bohdanserdyuk.KVPTPP.presenter.entity.Service
-import com.bohdanserdyuk.KVPTPP.view.impl.PaymentActivity
+import com.bohdanserdyuk.KVPTPP.view.impl.PaymentFragment
 import com.bohdanserdyuk.KVPTPP.view.impl.SettingsActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -21,9 +22,7 @@ class ServicesPresenterImpl @Inject constructor(model: BaseContract.ServicesMode
     lateinit var services: List<Service>
     lateinit var servicesModel: ServicesModel
 
-    override fun onCreate() {
-        super.onCreate()
-
+    override fun onCreateView() {
         servicesModel = getModel(ServicesModelImpl::class.java)
         getModel(PreferencesModelImpl::class.java).isNewUser = false
 
@@ -38,7 +37,8 @@ class ServicesPresenterImpl @Inject constructor(model: BaseContract.ServicesMode
             servicesModel.update(ServiceDataToServiceMapper().mapServiceToServiceData(service))
             getModel(PreferencesModelImpl::class.java).selectedService = service.id
         }.start()
-        view.startActivity(PaymentActivity::class.java)
+
+        view.startFragment(StartPayment())
     }
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_STOP)

@@ -8,8 +8,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract;
-import com.bohdanserdyuk.KVPTPP.di.DependencyInjector;
-import com.bohdanserdyuk.KVPTPP.di.DependencyInjectorImpl;
 import com.lucky_apps.RainViewer.viewLayer.viewModel.BasePresenterViewModel;
 
 import javax.inject.Inject;

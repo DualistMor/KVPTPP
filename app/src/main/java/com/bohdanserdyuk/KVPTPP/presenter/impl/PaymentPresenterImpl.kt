@@ -15,11 +15,7 @@ import javax.inject.Inject
 
 class PaymentPresenterImpl @Inject constructor(model: BaseContract.PaymentModel) : BasePresenter<BaseContract.PaymentView, BaseContract.PaymentModel>(model), BaseContract.PaymentPresenter {
 
-    override fun onCreate() {
-        super.onCreate()
-        view.setDisplayHomeAsUpEnabled(true)
-        view.setDisplayShowHomeEnabled(true)
-
+    override fun onCreateView() {
         view.loadPage(R.string.payment_url)
     }
 
@@ -35,9 +31,5 @@ class PaymentPresenterImpl @Inject constructor(model: BaseContract.PaymentModel)
             )
         }
         view.hideProgressBar()
-    }
-
-    override fun onBackButtonPressed() {
-        view.goBack()
     }
 }

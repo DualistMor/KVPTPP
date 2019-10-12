@@ -1,10 +1,13 @@
 <resources>
     <string name="payment_url">https://www.liqpay.ua/ru/checkout/card/i57695751070</string>
     <string name="main_website">http://www.krcci.pl.ua/</string>
+    <string name="request_website">http://www.prof-ocinka.com/zakazat-ocenku-onlajn/</string>
+    <string name="apps_url">Here will be app address after release</string>
+
 
     <integer name="splash_delay">1000</integer>
 
-    <string name="feedback_email">bohdanserdyuk@gmail.com</string>
+    <string name="feedback_email">office@krcci.pl.ua</string>
 
     <string name="_50">50</string>
     <string name="_100">100</string>

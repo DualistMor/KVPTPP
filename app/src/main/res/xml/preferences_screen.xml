@@ -8,22 +8,4 @@
             android:summary="@string/pref_pib_sum"
             android:title="@string/pref_pib_title"></EditTextPreference>
     </PreferenceCategory>
-    <PreferenceCategory android:title="@string/pref_info" >
-        <Preference
-            android:id="@+id/website"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:defaultValue="Default value"
-            android:key="@string/website_key"
-            android:selectAllOnFocus="true"
-            android:singleLine="true"
-            android:title="@string/website" />
-        <Preference
-            android:id="@+id/feedback"
-            android:defaultValue="Default value"
-            android:key="@string/feedback_key"
-            android:selectAllOnFocus="true"
-            android:singleLine="true"
-            android:title="@string/feedback" />
-    </PreferenceCategory>
 </PreferenceScreen>

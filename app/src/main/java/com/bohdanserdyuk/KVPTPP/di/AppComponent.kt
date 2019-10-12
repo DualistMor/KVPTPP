@@ -14,8 +14,8 @@ import javax.inject.Singleton
 @Singleton
 interface AppComponent {
     fun inject(activity: MainActivity)
-    fun inject(activity: ServicesActivity)
-    fun inject(activity: PaymentActivity)
+    fun inject(fragment: ServicesFragment)
+    fun inject(fragment: PaymentFragment)
     fun inject(fragment: MyPreferenceFragment)
     fun inject(activity: OnceShowingScreen)
     fun inject(activity: SettingsActivity)
