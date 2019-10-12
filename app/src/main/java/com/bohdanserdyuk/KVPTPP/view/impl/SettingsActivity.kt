@@ -16,7 +16,7 @@ class SettingsActivity : BaseActivity<BaseContract.SettingsView, BaseContract.Se
         (application as KVPTPPAplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_screen)
-        fragmentManager.beginTransaction().replace(R.id.content, MyPreferenceFragment(presenter)).commit()
+//        fragmentManager.beginTransaction().replace(R.id.content, MyPreferenceFragment(presenter)).commit()
     }
 
     override fun setDisplayHomeAsUpEnabled(b: Boolean) {

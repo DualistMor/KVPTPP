@@ -13,6 +13,7 @@ import javax.inject.Singleton
     PresentersModule::class])
 @Singleton
 interface AppComponent {
+    fun inject(activity: MainActivity)
     fun inject(activity: ServicesActivity)
     fun inject(activity: PaymentActivity)
     fun inject(fragment: MyPreferenceFragment)

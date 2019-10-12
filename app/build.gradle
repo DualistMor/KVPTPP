@@ -31,6 +31,10 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     /**
+     * PreferenceFragmentCompat
+     */
+    implementation 'com.android.support:preference-v7:28.0.0'
+    /**
      * Coroutines
      */
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.2'

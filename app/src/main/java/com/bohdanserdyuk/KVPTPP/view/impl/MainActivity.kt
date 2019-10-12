@@ -1,71 +1,99 @@
 package com.bohdanserdyuk.KVPTPP.view.impl
 
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
-import android.support.design.widget.Snackbar
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
 import android.support.v4.widget.DrawerLayout
 import android.support.design.widget.NavigationView
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
-import android.view.Menu
+import android.support.v4.app.Fragment
+import android.view.View
+import com.bohdanserdyuk.KVPTPP.KVPTPPAplication
 import com.bohdanserdyuk.KVPTPP.R
+import com.bohdanserdyuk.KVPTPP.contract.BaseContract
+import com.bohdanserdyuk.KVPTPP.view.BaseActivity
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.app_bar_main.*
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+
+class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresenter>(), BaseContract.MainView, NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        (application as KVPTPPAplication).appComponent.inject(this)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
 
-        val fab: FloatingActionButton = findViewById(R.id.floatingActionButton)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
-        val navView: NavigationView = findViewById(R.id.nav_view)
-        val toggle = ActionBarDrawerToggle(
-            this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawerLayout.addDrawerListener(toggle)
+        setSupportActionBar(toolbar)
+        floatingActionButton.setOnClickListener(this)
+        val toggle = ActionBarDrawerToggle(this,
+            drawer_layout,
+            toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close)
+        drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
-        navView.setNavigationItemSelectedListener(this)
+        nav_view.setNavigationItemSelectedListener(this)
     }
 
     override fun onBackPressed() {
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START)
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
         }
+        supportFragmentManager.popBackStack()
+    }
+
+    override fun onClick(v: View?) {
+
+        presenter.itemSelected(floatingActionButton.id)
+    }
+
+    override fun animateChangeFragment(id: Int) {
+        animateChangeFragment(
+        when(id) {
+            floatingActionButton.id -> MyPreferenceFragment()
+            R.id.nav_services ->
+            R.id.nav_request ->
+            R.id.nav_about_us ->
+            R.id.nav_feedback ->
+            R.id.nav_share ->
+            else -> MyPreferenceFragment()
+        }
+        )
+    }
+
+    fun animateChangeFragment(f: Fragment) {
+        supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_from_right,
+            R.anim.slide_to_left,
+            R.anim.slide_from_left,
+            R.anim.slide_to_right)
+            .replace(R.id.container, f)
+            .commit()
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_services -> {
-                // Handle the camera action
+                presenter.itemSelected(R.id.nav_services)
             }
             R.id.nav_request -> {
-
+                presenter.itemSelected(R.id.nav_request)
             }
             R.id.nav_about_us -> {
-
+                presenter.itemSelected(R.id.nav_about_us)
             }
             R.id.nav_feedback -> {
-
+                presenter.itemSelected(R.id.nav_feedback)
             }
             R.id.nav_share -> {
-
+                presenter.itemSelected(R.id.nav_share)
             }
         }
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
-        drawerLayout.closeDrawer(GravityCompat.START)
+        drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
 }

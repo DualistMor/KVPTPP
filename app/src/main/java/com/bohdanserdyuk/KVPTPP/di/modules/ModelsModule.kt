@@ -14,12 +14,12 @@ import dagger.Provides
 @Module
 class ModelsModule {
     @Provides
-    fun provideServicesModel(datasource: DatabaseServicesDatasource): ServicesModel {
+    fun provideServicesRepository(datasource: DatabaseServicesDatasource): ServicesModel {
         return ServicesModelImpl(datasource)
     }
 
     @Provides
-    fun providePreferencesModel(context: Context, pref: SharedPreferences, edit: SharedPreferences.Editor): PreferencesModel {
+    fun providePreferencesRepository(context: Context, pref: SharedPreferences, edit: SharedPreferences.Editor): PreferencesModel {
         return PreferencesModelImpl(context, pref, edit)
     }
 
@@ -40,10 +40,18 @@ class ModelsModule {
     }
 
     @Provides
-    fun provideMainModel(preferencesModel: PreferencesModel, servicesModel: ServicesModel): BaseContract.ServicesModel {
+    fun provideServicesModel(preferencesModel: PreferencesModel, servicesModel: ServicesModel): BaseContract.ServicesModel {
         return object : BaseContract.ServicesModel {
             override val models: Array<BaseContract.Model>
                 get() = arrayOf(preferencesModel, servicesModel)
+        }
+    }
+
+    @Provides
+    fun provideMainModel(): BaseContract.MainModel {
+        return object : BaseContract.MainModel {
+            override val models: Array<BaseContract.Model>
+                get() = emptyArray()
         }
     }
 

@@ -3,6 +3,7 @@ package com.bohdanserdyuk.KVPTPP.contract
 import android.app.Activity
 import android.arch.lifecycle.Lifecycle
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import com.bohdanserdyuk.KVPTPP.presenter.entity.Service
 
 interface BaseContract {
@@ -40,6 +41,18 @@ interface BaseContract {
         fun onPresenterDestroy()
     }
 
+    /**
+     * Main screen contract
+     */
+    interface MainView : View {
+        fun animateChangeFragment(id: Int)
+    }
+
+    interface MainPresenter : Presenter<MainView> {
+        fun itemSelected(id: Int)
+    }
+
+    interface MainModel: Models
     /**
      * Splash screen contract
      */

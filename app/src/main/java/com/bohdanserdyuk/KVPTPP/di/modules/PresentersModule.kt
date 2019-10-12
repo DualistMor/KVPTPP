@@ -8,7 +8,12 @@ import dagger.Provides
 @Module
 class PresentersModule {
     @Provides
-    fun provideMainPresenter(model: BaseContract.ServicesModel): BaseContract.ServicesPresenter {
+    fun provideMainPresenter(model: BaseContract.MainModel): BaseContract.MainPresenter {
+        return MainPresenterImpl(model)
+    }
+
+    @Provides
+    fun provideServicesPresenter(model: BaseContract.ServicesModel): BaseContract.ServicesPresenter {
         return ServicesPresenterImpl(model)
     }
 
