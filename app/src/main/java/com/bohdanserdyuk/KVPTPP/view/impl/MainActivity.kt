@@ -76,6 +76,7 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
         } else {
             supportActionBar?.setDisplayHomeAsUpEnabled(false)
             supportActionBar?.setHomeButtonEnabled(false)
+            supportActionBar?.title = getString(R.string.menu_services)
             resyncActionBarDrawerToggle()
             supportFragmentManager.popBackStack()
         }
@@ -112,9 +113,18 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
     override fun animateChangeFragment(id: Int) {
         animateChangeFragment(
             when (id) {
-                floatingActionButton.id -> MyPreferenceFragment()
-                R.id.nav_services -> ServicesFragment()
-                R.id.nav_about_us -> AboutFragment()
+                floatingActionButton.id -> {
+                    supportActionBar?.title = this.getString(R.string.editing)
+                    MyPreferenceFragment()
+                }
+                R.id.nav_services -> {
+                    supportActionBar?.title = this.getString(R.string.menu_services)
+                    ServicesFragment()
+                }
+                R.id.nav_about_us -> {
+                    supportActionBar?.title = this.getString(R.string.menu_about)
+                    AboutFragment()
+                }
                 else -> MyPreferenceFragment()
             }
         )
@@ -136,6 +146,7 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
     }
 
     override fun startPayment() {
+        supportActionBar?.title = this.getString(R.string.payment)
         animateChangeFragment(PaymentFragment())
     }
 
