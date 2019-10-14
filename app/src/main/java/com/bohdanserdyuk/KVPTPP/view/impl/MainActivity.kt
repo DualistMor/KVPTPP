@@ -11,6 +11,7 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
 import android.view.View
+import com.bohdanserdyuk.KVPTPP.BuildConfig
 import com.bohdanserdyuk.KVPTPP.KVPTPPAplication
 import com.bohdanserdyuk.KVPTPP.R
 import com.bohdanserdyuk.KVPTPP.broker.StartPayment
@@ -19,6 +20,7 @@ import com.bohdanserdyuk.KVPTPP.view.BaseActivity
 import com.lucky_apps.RainViewer.viewLayer.viewModel.BasePresenterViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.app_version_view.*
 
 
 class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresenter>(),

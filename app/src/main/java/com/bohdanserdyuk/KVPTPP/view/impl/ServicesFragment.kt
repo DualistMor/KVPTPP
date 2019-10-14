@@ -18,7 +18,7 @@ import com.lucky_apps.RainViewer.viewLayer.viewModel.BasePresenterViewModel
 import kotlinx.android.synthetic.main.fragment_services.*
 import kotlinx.android.synthetic.main.fragment_services.view.*
 
-class ServicesFragment : BaseFragment<BaseContract.ServicesView, BaseContract.ServicesPresenter>(), BaseContract.ServicesView, View.OnClickListener {
+class ServicesFragment : BaseFragment<BaseContract.ServicesView, BaseContract.ServicesPresenter>(), BaseContract.ServicesView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         (activity!!.application as KVPTPPAplication).appComponent.inject(this)
@@ -47,9 +47,5 @@ class ServicesFragment : BaseFragment<BaseContract.ServicesView, BaseContract.Se
 
     override fun itemClick(s: Service) {
         presenter.itemClick(s)
-    }
-
-    override fun onClick(v: View?) {
-        presenter.editClick()
     }
 }

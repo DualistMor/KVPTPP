@@ -5,7 +5,7 @@ import com.bohdanserdyuk.KVPTPP.presenter.entity.Service
 
 class ServiceDataToServiceMapper {
     fun mapServiceDataToService(serviceData: ServiceData): Service {
-        return with(serviceData) { Service(id, title, if (money != 0) money.toString() else "") }
+        return with(serviceData) { Service(id, title, if (money != 0f) money.toString() else "") }
     }
 
     fun mapServiceDataToService(serviceData: List<ServiceData>): List<Service> {
@@ -13,6 +13,6 @@ class ServiceDataToServiceMapper {
     }
 
     fun mapServiceToServiceData(service: Service): ServiceData {
-        return with(service) { ServiceData(id, title, if (money != "") Integer.parseInt(money) else 0) }
+        return with(service) { ServiceData(id, title, if (money != "") money.toFloat() else 0f) }
     }
 }

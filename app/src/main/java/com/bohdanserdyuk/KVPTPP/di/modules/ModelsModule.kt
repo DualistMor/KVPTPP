@@ -56,6 +56,14 @@ class ModelsModule {
     }
 
     @Provides
+    fun provideAboutModel(): BaseContract.AboutModel {
+        return object : BaseContract.AboutModel {
+            override val models: Array<BaseContract.Model>
+                get() = emptyArray()
+        }
+    }
+
+    @Provides
     fun providePaymentModel(preferencesModel: PreferencesModel, servicesModel: ServicesModel): BaseContract.PaymentModel {
         return object : BaseContract.PaymentModel {
             override val models: Array<BaseContract.Model>

@@ -47,6 +47,15 @@
         <item>Оцінка транспортних засобів</item>
     </string-array>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="about_app">Кременчуцьке відділення представляє інтереси Полтавської Торгово-промислової палати
+        в південному регіоні Полтавської області і пропонує дійсним членам, а також підприємствам регіону весь спектр інформаційних,
+        консультаційних, експертних, рекламних та інших послуг. Підприємства, які скористалися послугами Кременчуцького відділення Полтавської ТПП,
+        гідно оцінили рівень професіоналізму і наданого сервісу.
+    </string>
+    <string name="clipboard_saved">Збережено в буфер обміну</string>
+    <string name="address">Адреса:</string>
+    <string name="address_value">Україна, 39600, м. Кременчук вул. Генерала Жадова, 2</string>
+    <string name="email">Електронна пошта:</string>
+    <string name="contacts">Контакти:</string>
+    <string name="url_contacts">http://www.krcci.pl.ua/contacts</string>
 </resources>

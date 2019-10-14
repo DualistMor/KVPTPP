@@ -10,8 +10,6 @@ import com.bohdanserdyuk.KVPTPP.model.repository.impl.PreferencesModelImpl
 import com.bohdanserdyuk.KVPTPP.model.repository.impl.ServicesModelImpl
 import com.bohdanserdyuk.KVPTPP.presenter.BasePresenter
 import com.bohdanserdyuk.KVPTPP.presenter.entity.Service
-import com.bohdanserdyuk.KVPTPP.view.impl.PaymentFragment
-import com.bohdanserdyuk.KVPTPP.view.impl.SettingsActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -48,9 +46,5 @@ class ServicesPresenterImpl @Inject constructor(model: BaseContract.ServicesMode
                 servicesModel.update(ServiceDataToServiceMapper().mapServiceToServiceData(it))
             }
         }.start()
-    }
-
-    override fun editClick() {
-        view.startActivity(SettingsActivity::class.java)
     }
 }

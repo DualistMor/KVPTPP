@@ -56,6 +56,7 @@ interface BaseContract {
         fun launchRequestWebsite()
 
         fun shareApp()
+
         fun startMainFragment(id: Int)
     }
 
@@ -79,6 +80,24 @@ interface BaseContract {
     interface SplashPresenter : Presenter<SplashView>
 
     interface SplashModel: Models
+    /**
+     * About fragment contract
+     */
+    interface AboutView : View {
+        fun showAppsVersion()
+
+        fun saveToClipboard(text: CharSequence?)
+
+        fun showToast(stringId: Int)
+    }
+
+    interface AboutPresenter : Presenter<AboutView> {
+        fun onCreateView()
+
+        fun saveToClipboard(text: CharSequence?)
+    }
+
+    interface AboutModel: Models
     /**
      * Once screen contract
      */
@@ -109,8 +128,6 @@ interface BaseContract {
         fun onCreateView()
 
         fun itemClick(s: Service)
-
-        fun editClick()
     }
 
     interface ServicesModel: Models

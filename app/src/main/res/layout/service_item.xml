@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/sum_to_pay"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
