@@ -50,9 +50,11 @@ class PaymentFragment : BaseFragment<BaseContract.PaymentView, BaseContract.Paym
         webview.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView?, url: String?) {
                 Handler().postDelayed({
-                    presenter.pageFinished(getString(R.string.users_pattern), getString(R.string.js_insert_pattern))
+                    if(presenter.isViewAttached) {
+                        presenter.pageFinished(getString(R.string.users_pattern), getString(R.string.js_insert_pattern))
+                        super.onPageFinished(view, url)
+                    }
 
-                    super.onPageFinished(view, url)
                 }, 1000)
             }
         }
