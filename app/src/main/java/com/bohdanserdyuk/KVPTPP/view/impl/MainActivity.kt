@@ -20,7 +20,6 @@ import com.bohdanserdyuk.KVPTPP.view.BaseActivity
 import com.lucky_apps.RainViewer.viewLayer.viewModel.BasePresenterViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.app_version_view.*
 
 
 class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresenter>(),
@@ -63,6 +62,7 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
     }
 
     override fun startMainFragment(id: Int) {
+        supportActionBar?.title = this.getString(R.string.menu_services)
         supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_from_right,
             R.anim.slide_to_left,
             R.anim.slide_from_left,
@@ -133,18 +133,32 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
     }
 
     private fun animateChangeFragment(f: Fragment) {
-        supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_from_right,
-            R.anim.slide_to_left,
-            R.anim.slide_from_left,
-            R.anim.slide_to_right)
-            .replace(R.id.container, f)
-            .addToBackStack(null)
-            .commit()
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setHomeButtonEnabled(true)
-        toolbar.setNavigationOnClickListener {
-            onBackPressed()
+        if ( f::class.java.simpleName != getVisibleFragment()!!::class.java.simpleName) {
+            supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_from_right,
+                R.anim.slide_to_left,
+                R.anim.slide_from_left,
+                R.anim.slide_to_right)
+                .replace(R.id.container, f)
+                .addToBackStack(null)
+                .commit()
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            supportActionBar?.setHomeButtonEnabled(true)
+            toolbar.setNavigationOnClickListener {
+                onBackPressed()
+            }
         }
+    }
+
+    private fun getVisibleFragment(): Fragment? {
+        val fragmentManager = this@MainActivity.supportFragmentManager
+        val fragments = fragmentManager.fragments
+        if (fragments != null) {
+            for (fragment in fragments) {
+                if (fragment != null && fragment.isVisible)
+                    return fragment
+            }
+        }
+        return null
     }
 
     override fun startPayment() {
