@@ -33,6 +33,11 @@ class PresentersModule {
     }
 
     @Provides
+    fun provideRequestPresenter(model: BaseContract.RequestModel): BaseContract.RequestPresenter {
+        return RequestPresenterImpl(model)
+    }
+
+    @Provides
     fun providePreferencesPresenter(model: BaseContract.SettingsModel): BaseContract.SettingsPresenter {
         return SettingsPresenterImpl(model)
     }

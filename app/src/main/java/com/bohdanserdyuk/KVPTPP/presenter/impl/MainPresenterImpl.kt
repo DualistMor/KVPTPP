@@ -10,7 +10,6 @@ class MainPresenterImpl @Inject constructor(model: BaseContract.MainModel): Base
         when (id) {
             R.id.nav_website -> view.launchMainWebsite()
             R.id.nav_feedback -> view.sendFeedback()
-            R.id.nav_request -> view.launchRequestWebsite()
             R.id.nav_share -> view.shareApp()
             else -> view.animateChangeFragment(id)
         }

@@ -3,7 +3,6 @@ package com.bohdanserdyuk.KVPTPP.contract
 import android.app.Activity
 import android.arch.lifecycle.Lifecycle
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import com.bohdanserdyuk.KVPTPP.presenter.entity.Service
 
 interface BaseContract {
@@ -53,8 +52,6 @@ interface BaseContract {
 
         fun startPayment()
 
-        fun launchRequestWebsite()
-
         fun shareApp()
 
         fun startMainFragment(id: Int)
@@ -68,7 +65,7 @@ interface BaseContract {
         fun startMainFragment()
     }
 
-    interface MainModel: Models
+    interface MainModel : Models
     /**
      * Splash screen contract
      */
@@ -79,7 +76,7 @@ interface BaseContract {
 
     interface SplashPresenter : Presenter<SplashView>
 
-    interface SplashModel: Models
+    interface SplashModel : Models
     /**
      * About fragment contract
      */
@@ -97,12 +94,13 @@ interface BaseContract {
         fun saveToClipboard(text: CharSequence?)
     }
 
-    interface AboutModel: Models
+    interface AboutModel : Models
     /**
      * Once screen contract
      */
     interface OnceView : View {
         fun startMainActivity()
+
         fun showWrongPibToast()
     }
 
@@ -110,7 +108,7 @@ interface BaseContract {
         fun buttonClicked(pib: String)
     }
 
-    interface OnceModel: Models
+    interface OnceModel : Models
     /**
      * Services screen contract
      */
@@ -130,7 +128,7 @@ interface BaseContract {
         fun itemClick(s: Service)
     }
 
-    interface ServicesModel: Models
+    interface ServicesModel : Models
     /**
      * Payment screen contract
      */
@@ -148,8 +146,23 @@ interface BaseContract {
         fun pageFinished(usersPattern: String, jsPattern: String)
     }
 
-    interface PaymentModel: Models
+    interface PaymentModel : Models
+    /**
+     * Request screen contract
+     */
+    interface RequestView : View {
+        fun loadPage(urlResID: Int)
 
+        fun hideProgressBar()
+    }
+
+    interface RequestPresenter : Presenter<RequestView> {
+        fun onCreateView()
+
+        fun pageFinished()
+    }
+
+    interface RequestModel : Models
     /**
      * Settings screen contract
      */
@@ -175,5 +188,5 @@ interface BaseContract {
         fun isFullNameCorrectUA(toString: String): Boolean
     }
 
-    interface SettingsModel: Models
+    interface SettingsModel : Models
 }

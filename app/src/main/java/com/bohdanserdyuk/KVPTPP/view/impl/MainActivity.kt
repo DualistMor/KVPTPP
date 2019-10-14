@@ -11,7 +11,6 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
 import android.view.View
-import com.bohdanserdyuk.KVPTPP.BuildConfig
 import com.bohdanserdyuk.KVPTPP.KVPTPPAplication
 import com.bohdanserdyuk.KVPTPP.R
 import com.bohdanserdyuk.KVPTPP.broker.StartPayment
@@ -91,11 +90,6 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
             Uri.parse(getString(R.string.main_website))))
     }
 
-    override fun launchRequestWebsite() {
-        startActivity(Intent(Intent.ACTION_VIEW,
-            Uri.parse(getString(R.string.request_website))))
-    }
-
     override fun sendFeedback() {
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "plain/text"
@@ -118,6 +112,10 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
                 floatingActionButton.id -> {
                     supportActionBar?.title = this.getString(R.string.editing)
                     MyPreferenceFragment()
+                }
+                R.id.nav_request -> {
+                    supportActionBar?.title = this.getString(R.string.menu_request)
+                    RequestFragment()
                 }
                 R.id.nav_services -> {
                     supportActionBar?.title = this.getString(R.string.menu_services)

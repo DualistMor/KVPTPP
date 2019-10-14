@@ -14,16 +14,11 @@ import javax.inject.Singleton
 @Singleton
 interface AppComponent {
     fun inject(activity: MainActivity)
+    fun inject(fragment: RequestFragment)
     fun inject(fragment: AboutFragment)
     fun inject(fragment: ServicesFragment)
     fun inject(fragment: PaymentFragment)
     fun inject(fragment: MyPreferenceFragment)
     fun inject(activity: OnceShowingScreen)
     fun inject(activity: SplashScreen)
-
-    fun inject(presenter: ServicesPresenterImpl)
-    fun inject(presenter: PaymentPresenterImpl)
-    fun inject(presenter: SettingsPresenterImpl)
-    fun inject(presenter: OncescreenPresenterImpl)
-    fun inject(presenter: SplashPresenterImpl)
 }

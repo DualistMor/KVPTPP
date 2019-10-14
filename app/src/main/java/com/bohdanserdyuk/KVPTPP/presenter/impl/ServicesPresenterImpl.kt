@@ -39,8 +39,8 @@ class ServicesPresenterImpl @Inject constructor(model: BaseContract.ServicesMode
         view.startFragment(StartPayment())
     }
 
-    @OnLifecycleEvent(value = Lifecycle.Event.ON_STOP)
-    fun onStop() {
+    @OnLifecycleEvent(value = Lifecycle.Event.ON_PAUSE)
+    fun onPause() {
         GlobalScope.launch(Dispatchers.Main) {
             services.forEach {
                 servicesModel.update(ServiceDataToServiceMapper().mapServiceToServiceData(it))

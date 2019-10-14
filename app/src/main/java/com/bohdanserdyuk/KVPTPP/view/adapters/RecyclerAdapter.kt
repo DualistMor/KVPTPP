@@ -56,7 +56,8 @@ class ServicesRecyclerAdapter(val view: BaseContract.ServicesView,
                 R.id.expand_arrow -> animateViewHolder()
                 R.id.value_button_1,
                 R.id.value_button_2,
-                R.id.value_button_3 -> {
+                R.id.value_button_3,
+                R.id.value_button_4 -> {
                     editText.setText((v as Button).text)
                 }
                 else -> view.itemClick(items[index])

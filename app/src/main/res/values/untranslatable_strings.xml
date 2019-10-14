@@ -1,7 +1,7 @@
 <resources>
     <string name="payment_url">https://www.liqpay.ua/ru/checkout/card/i57695751070</string>
     <string name="main_website">http://www.krcci.pl.ua/</string>
-    <string name="request_website">http://www.prof-ocinka.com/zakazat-ocenku-onlajn/</string>
+    <string name="request_url">http://www.prof-ocinka.com/zakazat-ocenku-onlajn/</string>
     <string name="apps_url">Here will be app address after release</string>
 
 
@@ -12,6 +12,7 @@
     <string name="_50">50</string>
     <string name="_100">100</string>
     <string name="_500">500</string>
+    <string name="_1000">1000</string>
 
     <string name="js_ammount_pattern">"javascript:(function() { var elements = document.getElementsByClassName(\'input input__amount\'); elements[0].innerHTML = \'%s\';})()"</string>
     <string name="js_insert_pattern">"javascript:(function() { var elements = document.getElementsByClassName(\'textarea paper-input paper-input-\-floating\'); elements[0].innerHTML = \'%s\';})()"</string>

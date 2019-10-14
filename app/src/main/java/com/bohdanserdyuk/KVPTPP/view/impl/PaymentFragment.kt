@@ -3,7 +3,6 @@ package com.bohdanserdyuk.KVPTPP.view.impl
 import android.Manifest
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.app.ActivityCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -14,14 +13,10 @@ import android.webkit.WebViewClient
 import com.bohdanserdyuk.KVPTPP.KVPTPPAplication
 import com.bohdanserdyuk.KVPTPP.R
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
-import com.bohdanserdyuk.KVPTPP.model.repository.ServicesModel
-import com.bohdanserdyuk.KVPTPP.model.repository.impl.PreferencesModelImpl
-import com.bohdanserdyuk.KVPTPP.view.BaseActivity
 import com.bohdanserdyuk.KVPTPP.view.BaseFragment
 import com.bohdanserdyuk.KVPTPP.view.heplers.PermissionChecker
-import kotlinx.android.synthetic.main.payment_view.*
-import kotlinx.android.synthetic.main.payment_view.view.*
-import javax.inject.Inject
+import kotlinx.android.synthetic.main.web_view.*
+import kotlinx.android.synthetic.main.web_view.view.*
 
 
 class PaymentFragment : BaseFragment<BaseContract.PaymentView, BaseContract.PaymentPresenter>(), BaseContract.PaymentView {
@@ -36,7 +31,7 @@ class PaymentFragment : BaseFragment<BaseContract.PaymentView, BaseContract.Paym
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val v = inflater.inflate(R.layout.payment_view,container, false)
+        val v = inflater.inflate(R.layout.web_view,container, false)
         webview = v.web_view
         webview.settings.javaScriptEnabled = true
         webview.settings.domStorageEnabled = true
