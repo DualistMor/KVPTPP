@@ -2,6 +2,8 @@ package com.bohdanserdyuk.KVPTPP.presenter.impl
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
+import com.bohdanserdyuk.KVPTPP.broker.ScrolledDown
+import com.bohdanserdyuk.KVPTPP.broker.ScrolledUp
 import com.bohdanserdyuk.KVPTPP.broker.StartPayment
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
 import com.bohdanserdyuk.KVPTPP.model.entity.mapper.ServiceDataToServiceMapper
@@ -23,12 +25,15 @@ class ServicesPresenterImpl @Inject constructor(model: BaseContract.ServicesMode
     override fun onCreateView() {
         servicesModel = getModel(ServicesModelImpl::class.java)
         getModel(PreferencesModelImpl::class.java).isNewUser = false
-
         GlobalScope.launch(Dispatchers.Main) {
             services = ServiceDataToServiceMapper().mapServiceDataToService(servicesModel.readAll())
             view.setAdapter(services)
         }.start()
     }
+
+    override fun scrolledDown() = view.sendMessage(ScrolledDown())
+
+    override fun scrolledUp() = view.sendMessage(ScrolledUp())
 
     override fun itemClick(service: Service) {
         GlobalScope.launch(Dispatchers.Main) {
@@ -36,7 +41,7 @@ class ServicesPresenterImpl @Inject constructor(model: BaseContract.ServicesMode
             getModel(PreferencesModelImpl::class.java).selectedService = service.id
         }.start()
 
-        view.startFragment(StartPayment())
+        view.sendMessage(StartPayment())
     }
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_PAUSE)

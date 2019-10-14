@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +19,7 @@ import com.lucky_apps.RainViewer.viewLayer.viewModel.BasePresenterViewModel
 import kotlinx.android.synthetic.main.fragment_services.*
 import kotlinx.android.synthetic.main.fragment_services.view.*
 
-class ServicesFragment : BaseFragment<BaseContract.ServicesView, BaseContract.ServicesPresenter>(), BaseContract.ServicesView {
+class ServicesFragment : BaseFragment<BaseContract.ServicesView, BaseContract.ServicesPresenter>(), BaseContract.ServicesView{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         (activity!!.application as KVPTPPAplication).appComponent.inject(this)
@@ -29,11 +30,17 @@ class ServicesFragment : BaseFragment<BaseContract.ServicesView, BaseContract.Se
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_services, container, false)
         v.servicesRecycler.layoutManager = LinearLayoutManager(activity)
+        v.servicesRecycler.addOnScrollListener(object: RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 0 ) presenter.scrolledDown() else if (dy < 0) presenter.scrolledUp()
+            }
+        })
         presenter.onCreateView()
         return v
     }
 
-    override fun startFragment(m: Any) {
+    override fun sendMessage(m: Any) {
         ViewModelProviders.of(activity!!).get(BasePresenterViewModel::class.java).sendMessage(m)
     }
 

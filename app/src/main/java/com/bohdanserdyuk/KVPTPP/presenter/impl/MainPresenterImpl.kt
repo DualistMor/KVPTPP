@@ -15,6 +15,14 @@ class MainPresenterImpl @Inject constructor(model: BaseContract.MainModel): Base
         }
     }
 
+    override fun scrolledDown() {
+        view.hideFab()
+    }
+
+    override fun scrolledUp() {
+        view.showFab()
+    }
+
     override fun startMainFragment() {
         view.startMainFragment(R.id.nav_services)
     }

@@ -55,6 +55,10 @@ interface BaseContract {
         fun shareApp()
 
         fun startMainFragment(id: Int)
+
+        fun showFab()
+
+        fun hideFab()
     }
 
     interface MainPresenter : Presenter<MainView> {
@@ -63,6 +67,10 @@ interface BaseContract {
         fun startPayment()
 
         fun startMainFragment()
+
+        fun scrolledDown()
+
+        fun scrolledUp()
     }
 
     interface MainModel : Models
@@ -119,13 +127,17 @@ interface BaseContract {
 
         fun itemClick(s: Service)
 
-        fun startFragment(m: Any)
+        fun sendMessage(m: Any)
     }
 
     interface ServicesPresenter : Presenter<ServicesView> {
         fun onCreateView()
 
         fun itemClick(s: Service)
+
+        fun scrolledDown()
+
+        fun scrolledUp()
     }
 
     interface ServicesModel : Models

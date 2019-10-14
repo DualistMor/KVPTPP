@@ -13,6 +13,8 @@ import android.view.MenuItem
 import android.view.View
 import com.bohdanserdyuk.KVPTPP.KVPTPPAplication
 import com.bohdanserdyuk.KVPTPP.R
+import com.bohdanserdyuk.KVPTPP.broker.ScrolledDown
+import com.bohdanserdyuk.KVPTPP.broker.ScrolledUp
 import com.bohdanserdyuk.KVPTPP.broker.StartPayment
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
 import com.bohdanserdyuk.KVPTPP.view.BaseActivity
@@ -57,6 +59,20 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
     override fun onChanged(t: Any?) {
         when (t) {
             is StartPayment -> presenter.startPayment()
+            is ScrolledDown -> presenter.scrolledDown()
+            is ScrolledUp -> presenter.scrolledUp()
+        }
+    }
+
+    override fun showFab() {
+        if (floatingActionButton.visibility != View.VISIBLE) {
+            floatingActionButton.show()
+        }
+    }
+
+    override fun hideFab() {
+        if (floatingActionButton.visibility == View.VISIBLE) {
+            floatingActionButton.hide()
         }
     }
 
@@ -131,7 +147,7 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
     }
 
     private fun animateChangeFragment(f: Fragment) {
-        if ( f::class.java.simpleName != getVisibleFragment()!!::class.java.simpleName) {
+        if (f::class.java.simpleName != getVisibleFragment()!!::class.java.simpleName) {
             supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_from_right,
                 R.anim.slide_to_left,
                 R.anim.slide_from_left,
