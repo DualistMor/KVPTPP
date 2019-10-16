@@ -14,15 +14,15 @@ import com.bohdanserdyuk.KVPTPP.KVPTPPAplication
 import com.bohdanserdyuk.KVPTPP.R
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
 import com.bohdanserdyuk.KVPTPP.view.BaseFragment
-import com.bohdanserdyuk.KVPTPP.view.heplers.PermissionChecker
-import kotlinx.android.synthetic.main.web_view.*
+import com.bohdanserdyuk.KVPTPP.view.helpers.PermissionChecker
 import kotlinx.android.synthetic.main.web_view.view.*
 
 
 class PaymentFragment : BaseFragment<BaseContract.PaymentView, BaseContract.PaymentPresenter>(), BaseContract.PaymentView {
     var PERMISSIONS = arrayOf(Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE)
     var PERMISSION_ALL = 1
-    lateinit var webview: WebView
+
+    lateinit var v: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         (activity!!.application as KVPTPPAplication).appComponent.inject(this)
@@ -31,21 +31,20 @@ class PaymentFragment : BaseFragment<BaseContract.PaymentView, BaseContract.Paym
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val v = inflater.inflate(R.layout.web_view,container, false)
-        webview = v.web_view
-        webview.settings.javaScriptEnabled = true
-        webview.settings.domStorageEnabled = true
-        webview.settings.loadWithOverviewMode = true
-        webview.settings.useWideViewPort = true
-        webview.settings.builtInZoomControls = true
-        webview.settings.displayZoomControls = false
-        webview.settings.setSupportZoom(true)
-        webview.settings.defaultTextEncodingName = "utf-8"
+        v = inflater.inflate(R.layout.web_view, container, false)
+        v.web_view.settings.javaScriptEnabled = true
+        v.web_view.settings.domStorageEnabled = true
+        v.web_view.settings.loadWithOverviewMode = true
+        v.web_view.settings.useWideViewPort = true
+        v.web_view.settings.builtInZoomControls = true
+        v.web_view.settings.displayZoomControls = false
+        v.web_view.settings.setSupportZoom(true)
+        v.web_view.settings.defaultTextEncodingName = "utf-8"
         v.cover.visibility = VISIBLE
-        webview.webViewClient = object : WebViewClient() {
+        v.web_view.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView?, url: String?) {
                 Handler().postDelayed({
-                    if(presenter.isViewAttached) {
+                    if (presenter.isViewAttached) {
                         presenter.pageFinished(getString(R.string.users_pattern), getString(R.string.js_insert_pattern))
                         super.onPageFinished(view, url)
                     }
@@ -58,7 +57,7 @@ class PaymentFragment : BaseFragment<BaseContract.PaymentView, BaseContract.Paym
     }
 
     override fun hideProgressBar() {
-        cover.visibility = GONE
+        v.cover.visibility = GONE
     }
 
     override fun loadPage(url: String) {
@@ -66,10 +65,9 @@ class PaymentFragment : BaseFragment<BaseContract.PaymentView, BaseContract.Paym
     }
 
     private fun loadPageWithPermissions(url: String) {
-        if(PermissionChecker().hasPermissions(activity, PERMISSIONS[0], PERMISSIONS[1])) {
-            webview.loadUrl(url)
-        }
-        else {
+        if (PermissionChecker().hasPermissions(activity, PERMISSIONS[0], PERMISSIONS[1])) {
+            v.web_view.loadUrl(url)
+        } else {
 //            ActivityCompat.requestPermissions(activity, PERMISSIONS, PERMISSION_ALL)
         }
     }

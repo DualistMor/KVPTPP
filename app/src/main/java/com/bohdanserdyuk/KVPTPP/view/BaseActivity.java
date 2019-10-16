@@ -36,6 +36,11 @@ public abstract class BaseActivity<V extends BaseContract.View, P extends BaseCo
     }
 
     @Override
+    public void fillSupportActionBar(int stringId, boolean isBackArrow) {
+
+    }
+
+    @Override
     public LifecycleRegistry getLifecycle() {
         return lifecycleRegistry;
     }

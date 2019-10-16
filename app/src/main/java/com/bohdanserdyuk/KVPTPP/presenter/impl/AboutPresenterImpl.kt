@@ -8,6 +8,7 @@ import javax.inject.Inject
 class AboutPresenterImpl @Inject constructor(aboutModel: BaseContract.AboutModel) : BasePresenter<BaseContract.AboutView, BaseContract.AboutModel>(aboutModel), BaseContract.AboutPresenter {
     override fun onCreateView() {
         view.showAppsVersion()
+        view.fillSupportActionBar(R.string.menu_about, true)
     }
 
     override fun saveToClipboard(text: CharSequence?) {

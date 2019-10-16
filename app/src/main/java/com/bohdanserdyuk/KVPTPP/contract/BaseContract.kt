@@ -14,7 +14,9 @@ interface BaseContract {
         val models: Array<Model>
     }
 
-    interface View
+    interface View {
+        fun fillSupportActionBar(stringId: Int, isBackArrow: Boolean)
+    }
 
     interface Presenter<V : View> {
         val view: V
@@ -178,26 +180,12 @@ interface BaseContract {
     /**
      * Settings screen contract
      */
-    interface SettingsView : View {
-
-        fun setDisplayHomeAsUpEnabled(b: Boolean)
-
-        fun setDisplayShowHomeEnabled(b: Boolean)
-
-        fun startWebsite()
-
-        fun sendFeedback()
-
-        fun setVersionName()
-        fun goBack()
-    }
+    interface SettingsView : View
 
     interface SettingsPresenter : Presenter<SettingsView> {
-        fun startWebsiteClicked()
-
-        fun sendFeedbackClicked()
-        fun onBackButtonPressed()
         fun isFullNameCorrectUA(toString: String): Boolean
+
+        fun onCreateView()
     }
 
     interface SettingsModel : Models

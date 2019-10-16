@@ -36,8 +36,8 @@ class ServicesRecyclerAdapter(val view: BaseContract.ServicesView,
         private val editText: EditText = itemView.sum
 
         init {
-            itemView.expand_arrow.setOnClickListener(this)
             itemView.setOnClickListener(this)
+            itemView.expand_arrow.setOnClickListener(this)
             editText.addTextChangedListener(this)
             val preloadedContainer = itemView.preloaded_value_buttons
             for (i in 0 until preloadedContainer.childCount) {

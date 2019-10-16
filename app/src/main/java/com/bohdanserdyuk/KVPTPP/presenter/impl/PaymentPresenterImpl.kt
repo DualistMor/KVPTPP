@@ -17,6 +17,7 @@ class PaymentPresenterImpl @Inject constructor(model: BaseContract.PaymentModel)
 
     override fun onCreateView() {
         view.loadPage(R.string.payment_url)
+        view.fillSupportActionBar(R.string.payment, true)
     }
 
     override fun pageFinished(usersPattern: String, jsPattern: String) {

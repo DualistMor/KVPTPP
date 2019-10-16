@@ -11,7 +11,7 @@ import com.bohdanserdyuk.KVPTPP.KVPTPPAplication
 import com.bohdanserdyuk.KVPTPP.R
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
 import com.bohdanserdyuk.KVPTPP.view.BaseFragment
-import com.bohdanserdyuk.KVPTPP.view.heplers.PermissionChecker
+import com.bohdanserdyuk.KVPTPP.view.helpers.PermissionChecker
 import kotlinx.android.synthetic.main.web_view.view.*
 
 

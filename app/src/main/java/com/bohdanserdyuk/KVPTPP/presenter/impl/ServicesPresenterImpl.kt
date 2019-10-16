@@ -2,6 +2,7 @@ package com.bohdanserdyuk.KVPTPP.presenter.impl
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
+import com.bohdanserdyuk.KVPTPP.R
 import com.bohdanserdyuk.KVPTPP.broker.ScrolledDown
 import com.bohdanserdyuk.KVPTPP.broker.ScrolledUp
 import com.bohdanserdyuk.KVPTPP.broker.StartPayment
@@ -29,6 +30,7 @@ class ServicesPresenterImpl @Inject constructor(model: BaseContract.ServicesMode
             services = ServiceDataToServiceMapper().mapServiceDataToService(servicesModel.readAll())
             view.setAdapter(services)
         }.start()
+        view.fillSupportActionBar(R.string.menu_services, false)
     }
 
     override fun scrolledDown() = view.sendMessage(ScrolledDown())

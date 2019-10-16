@@ -38,7 +38,7 @@ class PresentersModule {
     }
 
     @Provides
-    fun providePreferencesPresenter(model: BaseContract.SettingsModel): BaseContract.SettingsPresenter {
+    fun provideSettingsPresenter(model: BaseContract.SettingsModel): BaseContract.SettingsPresenter {
         return SettingsPresenterImpl(model)
     }
 

@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
@@ -38,12 +39,12 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
         setSupportActionBar(toolbar)
         floatingActionButton.setOnClickListener(this)
         resyncActionBarDrawerToggle()
-
         nav_view.setNavigationItemSelectedListener(this)
-
         ViewModelProviders.of(this).get(BasePresenterViewModel::class.java).getMessageContainer().observe(this, this)
 
-        presenter.startMainFragment()
+        if (savedInstanceState == null) {
+            presenter.startMainFragment()
+        }
     }
 
     private fun resyncActionBarDrawerToggle() {
@@ -77,7 +78,6 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
     }
 
     override fun startMainFragment(id: Int) {
-        supportActionBar?.title = this.getString(R.string.menu_services)
         supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_from_right,
             R.anim.slide_to_left,
             R.anim.slide_from_left,
@@ -93,9 +93,9 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
         } else {
             supportActionBar?.setDisplayHomeAsUpEnabled(false)
             supportActionBar?.setHomeButtonEnabled(false)
-            supportActionBar?.title = getString(R.string.menu_services)
             resyncActionBarDrawerToggle()
-            supportFragmentManager.popBackStack()
+
+            supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         }
     }
 
@@ -126,22 +126,18 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
         animateChangeFragment(
             when (id) {
                 floatingActionButton.id -> {
-                    supportActionBar?.title = this.getString(R.string.editing)
-                    MyPreferenceFragment()
+                    SettingsFragment()
                 }
                 R.id.nav_request -> {
-                    supportActionBar?.title = this.getString(R.string.menu_request)
                     RequestFragment()
                 }
                 R.id.nav_services -> {
-                    supportActionBar?.title = this.getString(R.string.menu_services)
                     ServicesFragment()
                 }
                 R.id.nav_about_us -> {
-                    supportActionBar?.title = this.getString(R.string.menu_about)
                     AboutFragment()
                 }
-                else -> MyPreferenceFragment()
+                else -> SettingsFragment()
             }
         )
     }
@@ -155,8 +151,7 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
                 .replace(R.id.container, f)
                 .addToBackStack(null)
                 .commit()
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            supportActionBar?.setHomeButtonEnabled(true)
+
             toolbar.setNavigationOnClickListener {
                 onBackPressed()
             }
@@ -176,7 +171,6 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
     }
 
     override fun startPayment() {
-        supportActionBar?.title = this.getString(R.string.payment)
         animateChangeFragment(PaymentFragment())
     }
 

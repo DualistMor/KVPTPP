@@ -21,6 +21,8 @@ import kotlinx.android.synthetic.main.fragment_services.view.*
 
 class ServicesFragment : BaseFragment<BaseContract.ServicesView, BaseContract.ServicesPresenter>(), BaseContract.ServicesView{
 
+    lateinit var v: View
+
     override fun onCreate(savedInstanceState: Bundle?) {
         (activity!!.application as KVPTPPAplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
@@ -28,7 +30,8 @@ class ServicesFragment : BaseFragment<BaseContract.ServicesView, BaseContract.Se
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val v = inflater.inflate(R.layout.fragment_services, container, false)
+        v = inflater.inflate(R.layout.fragment_services, container, false)
+        v.servicesRecycler.setItemViewCacheSize(15)
         v.servicesRecycler.layoutManager = LinearLayoutManager(activity)
         v.servicesRecycler.addOnScrollListener(object: RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -45,7 +48,7 @@ class ServicesFragment : BaseFragment<BaseContract.ServicesView, BaseContract.Se
     }
 
     override fun setAdapter(list: List<Service>) {
-        servicesRecycler.adapter = ServicesRecyclerAdapter(this, list, layoutInflater)
+        v.servicesRecycler.adapter = ServicesRecyclerAdapter(this, list, layoutInflater)
     }
 
     override fun <T : Activity> startActivity(c: Class<T>) {
