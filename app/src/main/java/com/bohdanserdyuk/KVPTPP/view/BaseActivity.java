@@ -1,16 +1,17 @@
 package com.bohdanserdyuk.KVPTPP.view;
 
-import android.arch.lifecycle.LifecycleRegistry;
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.CallSuper;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract;
 import com.lucky_apps.RainViewer.viewLayer.viewModel.BasePresenterViewModel;
 
 import javax.inject.Inject;
+
+import androidx.annotation.CallSuper;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LifecycleRegistry;
+import androidx.lifecycle.ViewModelProviders;
 
 public abstract class BaseActivity<V extends BaseContract.View, P extends BaseContract.Presenter<V>> extends AppCompatActivity implements BaseContract.View {
 
@@ -32,7 +33,7 @@ public abstract class BaseActivity<V extends BaseContract.View, P extends BaseCo
             presenter = presenterViewModel.getPresenter();
         }
         presenter.attachLifecycle(getLifecycle());
-        presenter.attachView((V)this);
+        presenter.attachView((V) this);
     }
 
     @Override

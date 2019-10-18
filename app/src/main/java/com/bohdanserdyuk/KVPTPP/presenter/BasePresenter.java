@@ -1,13 +1,6 @@
 package com.bohdanserdyuk.KVPTPP.presenter;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleObserver;
-import android.arch.lifecycle.OnLifecycleEvent;
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.CallSuper;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract;
 import com.bohdanserdyuk.KVPTPP.view.BaseActivity;
@@ -15,10 +8,18 @@ import com.bohdanserdyuk.KVPTPP.viewModel.BaseModelViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
+import androidx.annotation.CallSuper;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
+import androidx.lifecycle.ViewModelProviders;
+
 public abstract class BasePresenter<V extends BaseContract.View, M extends BaseContract.Models> implements LifecycleObserver, BaseContract.Presenter<V> {
 
-    private V view;
     public M model;
+    private V view;
     private Bundle stateBundle;
 
     public BasePresenter(M model) {

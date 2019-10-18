@@ -2,7 +2,7 @@ package com.bohdanserdyuk.KVPTPP.model.repository
 
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
 
-interface PreferencesModel: BaseContract.Model {
+interface PreferencesModel : BaseContract.Model {
     var isNewUser: Boolean
     var pib: String
     var selectedService: Int

@@ -1,17 +1,14 @@
 package com.bohdanserdyuk.KVPTPP.view.impl
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.design.widget.NavigationView
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.view.GravityCompat
-import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.bohdanserdyuk.KVPTPP.KVPTPPAplication
 import com.bohdanserdyuk.KVPTPP.R
 import com.bohdanserdyuk.KVPTPP.broker.ScrolledDown
@@ -19,6 +16,7 @@ import com.bohdanserdyuk.KVPTPP.broker.ScrolledUp
 import com.bohdanserdyuk.KVPTPP.broker.StartPayment
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
 import com.bohdanserdyuk.KVPTPP.view.BaseActivity
+import com.google.android.material.navigation.NavigationView
 import com.lucky_apps.RainViewer.viewLayer.viewModel.BasePresenterViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -95,7 +93,7 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
             supportActionBar?.setHomeButtonEnabled(false)
             resyncActionBarDrawerToggle()
 
-            supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
         }
     }
 
@@ -142,7 +140,7 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
         )
     }
 
-    private fun animateChangeFragment(f: Fragment) {
+    private fun animateChangeFragment(f: androidx.fragment.app.Fragment) {
         if (f::class.java.simpleName != getVisibleFragment()!!::class.java.simpleName) {
             supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_from_right,
                 R.anim.slide_to_left,
@@ -158,7 +156,7 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
         }
     }
 
-    private fun getVisibleFragment(): Fragment? {
+    private fun getVisibleFragment(): androidx.fragment.app.Fragment? {
         val fragmentManager = this@MainActivity.supportFragmentManager
         val fragments = fragmentManager.fragments
         if (fragments != null) {

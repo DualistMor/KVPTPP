@@ -5,7 +5,7 @@ import com.bohdanserdyuk.KVPTPP.model.entity.ServiceData
 import com.lucky_apps.data.db.ServicesEntityDAO
 import javax.inject.Inject
 
-class ServicesDatabaseImpl @Inject constructor(val servicesEntityDao: ServicesEntityDAO): ServicesDatabase {
+class ServicesDatabaseImpl @Inject constructor(val servicesEntityDao: ServicesEntityDAO) : ServicesDatabase {
     override fun read(id: Int): ServiceData? {
         return servicesEntityDao.read(id)
     }

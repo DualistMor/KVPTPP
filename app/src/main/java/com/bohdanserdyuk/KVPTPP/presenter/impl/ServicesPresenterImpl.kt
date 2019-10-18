@@ -1,7 +1,7 @@
 package com.bohdanserdyuk.KVPTPP.presenter.impl
 
-import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.OnLifecycleEvent
 import com.bohdanserdyuk.KVPTPP.R
 import com.bohdanserdyuk.KVPTPP.broker.ScrolledDown
 import com.bohdanserdyuk.KVPTPP.broker.ScrolledUp

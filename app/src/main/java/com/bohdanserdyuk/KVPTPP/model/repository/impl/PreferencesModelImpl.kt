@@ -3,7 +3,6 @@ package com.bohdanserdyuk.KVPTPP.model.repository.impl
 import android.content.Context
 import android.content.SharedPreferences
 import com.bohdanserdyuk.KVPTPP.R
-import com.bohdanserdyuk.KVPTPP.contract.BaseContract
 import com.bohdanserdyuk.KVPTPP.model.repository.PreferencesModel
 
 class PreferencesModelImpl(val context: Context, val pref: SharedPreferences, val editor: SharedPreferences.Editor) : PreferencesModel {

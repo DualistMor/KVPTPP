@@ -1,14 +1,14 @@
 package com.bohdanserdyuk.KVPTPP.view.impl
 
 import android.app.Activity
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bohdanserdyuk.KVPTPP.KVPTPPAplication
 import com.bohdanserdyuk.KVPTPP.R
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
@@ -16,10 +16,9 @@ import com.bohdanserdyuk.KVPTPP.presenter.entity.Service
 import com.bohdanserdyuk.KVPTPP.view.BaseFragment
 import com.bohdanserdyuk.KVPTPP.view.adapters.ServicesRecyclerAdapter
 import com.lucky_apps.RainViewer.viewLayer.viewModel.BasePresenterViewModel
-import kotlinx.android.synthetic.main.fragment_services.*
 import kotlinx.android.synthetic.main.fragment_services.view.*
 
-class ServicesFragment : BaseFragment<BaseContract.ServicesView, BaseContract.ServicesPresenter>(), BaseContract.ServicesView{
+class ServicesFragment : BaseFragment<BaseContract.ServicesView, BaseContract.ServicesPresenter>(), BaseContract.ServicesView {
 
     lateinit var v: View
 
@@ -33,10 +32,10 @@ class ServicesFragment : BaseFragment<BaseContract.ServicesView, BaseContract.Se
         v = inflater.inflate(R.layout.fragment_services, container, false)
         v.servicesRecycler.setItemViewCacheSize(15)
         v.servicesRecycler.layoutManager = LinearLayoutManager(activity)
-        v.servicesRecycler.addOnScrollListener(object: RecyclerView.OnScrollListener(){
+        v.servicesRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                if (dy > 0 ) presenter.scrolledDown() else if (dy < 0) presenter.scrolledUp()
+                if (dy > 0) presenter.scrolledDown() else if (dy < 0) presenter.scrolledUp()
             }
         })
         presenter.onCreateView()

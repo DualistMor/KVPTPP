@@ -5,7 +5,7 @@ import com.bohdanserdyuk.KVPTPP.di.AppComponent
 import com.bohdanserdyuk.KVPTPP.di.DaggerAppComponent
 import com.bohdanserdyuk.KVPTPP.di.modules.ContextModule
 
-class KVPTPPAplication: Application() {
+class KVPTPPAplication : Application() {
 
     lateinit var appComponent: AppComponent
 

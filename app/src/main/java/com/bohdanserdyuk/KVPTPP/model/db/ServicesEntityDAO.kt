@@ -1,6 +1,6 @@
 package com.lucky_apps.data.db
 
-import android.arch.persistence.room.*
+import androidx.room.*
 import com.bohdanserdyuk.KVPTPP.model.entity.ServiceData
 
 /**

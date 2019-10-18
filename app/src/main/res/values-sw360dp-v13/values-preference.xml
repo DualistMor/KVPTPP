@@ -1,6 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--It's for fixing PreferenceFragmentCompat bg with start padding in Preference and PreferenceCategory-->
+<?xml version="1.0" encoding="utf-8"?><!--It's for fixing PreferenceFragmentCompat bg with start padding in Preference and PreferenceCategory-->
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <bool name="config_materialPreferenceIconSpaceReserved" tools:ignore="MissingDefaultResource,PrivateResource">false</bool>
-    <dimen name="preference_category_padding_start" tools:ignore="MissingDefaultResource,PrivateResource">0dp</dimen>
+    <bool name="config_materialPreferenceIconSpaceReserved" tools:ignore="MissingDefaultResource,PrivateResource">
+        false
+    </bool>
+    <dimen name="preference_category_padding_start" tools:ignore="MissingDefaultResource,PrivateResource">
+        0dp
+    </dimen>
 </resources>

@@ -1,7 +1,6 @@
 package com.bohdanserdyuk.KVPTPP.view.adapters
 
 import android.animation.ObjectAnimator
-import android.support.v7.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -18,7 +17,7 @@ import kotlinx.android.synthetic.main.service_item.view.*
 
 class ServicesRecyclerAdapter(val view: BaseContract.ServicesView,
                               val items: List<Service>,
-                              private val layoutInflater: LayoutInflater) : RecyclerView.Adapter<ServicesRecyclerAdapter.ServicesViewHolder>() {
+                              private val layoutInflater: LayoutInflater) : androidx.recyclerview.widget.RecyclerView.Adapter<ServicesRecyclerAdapter.ServicesViewHolder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ServicesViewHolder {
         return ServicesViewHolder(layoutInflater.inflate(R.layout.service_item, p0, false))
@@ -30,7 +29,7 @@ class ServicesRecyclerAdapter(val view: BaseContract.ServicesView,
         p0.bind(p1)
     }
 
-    inner class ServicesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener, TextWatcher {
+    inner class ServicesViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView), View.OnClickListener, TextWatcher {
         private var index = 0
         private val title: TextView = itemView.service_title
         private val editText: EditText = itemView.sum

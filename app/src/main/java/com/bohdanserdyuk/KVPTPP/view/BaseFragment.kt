@@ -1,13 +1,12 @@
 package com.bohdanserdyuk.KVPTPP.view
 
-import android.arch.lifecycle.LifecycleRegistry
-import android.arch.lifecycle.LifecycleRegistryOwner
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.annotation.CallSuper
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.preference.PreferenceFragmentCompat
+import androidx.annotation.CallSuper
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LifecycleRegistry
+import androidx.lifecycle.LifecycleRegistryOwner
+import androidx.lifecycle.ViewModelProviders
+import androidx.preference.PreferenceFragmentCompat
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
 import com.bohdanserdyuk.KVPTPP.view.helpers.FragmentGetActivityHelper
 import com.lucky_apps.RainViewer.viewLayer.viewModel.BasePresenterViewModel

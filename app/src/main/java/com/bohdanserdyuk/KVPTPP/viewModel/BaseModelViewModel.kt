@@ -1,6 +1,6 @@
 package com.bohdanserdyuk.KVPTPP.viewModel
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
 

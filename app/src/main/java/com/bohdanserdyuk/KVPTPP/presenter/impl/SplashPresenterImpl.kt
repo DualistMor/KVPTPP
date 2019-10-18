@@ -9,7 +9,7 @@ import com.bohdanserdyuk.KVPTPP.view.impl.MainActivity
 import com.bohdanserdyuk.KVPTPP.view.impl.OnceShowingScreen
 import javax.inject.Inject
 
-class SplashPresenterImpl @Inject constructor(splashModel: BaseContract.SplashModel): BasePresenter<BaseContract.SplashView, BaseContract.SplashModel>(splashModel), BaseContract.SplashPresenter {
+class SplashPresenterImpl @Inject constructor(splashModel: BaseContract.SplashModel) : BasePresenter<BaseContract.SplashView, BaseContract.SplashModel>(splashModel), BaseContract.SplashPresenter {
 
     override fun onCreate() {
         super.onCreate()

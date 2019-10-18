@@ -1,8 +1,8 @@
 package com.bohdanserdyuk.KVPTPP.contract
 
 import android.app.Activity
-import android.arch.lifecycle.Lifecycle
 import android.os.Bundle
+import androidx.lifecycle.Lifecycle
 import com.bohdanserdyuk.KVPTPP.presenter.entity.Service
 
 interface BaseContract {

@@ -1,7 +1,6 @@
 package com.bohdanserdyuk.KVPTPP.view.helpers
 
 import android.app.Activity
-import android.support.v4.app.Fragment
 
 
 class FragmentGetActivityHelper {
@@ -17,7 +16,7 @@ class FragmentGetActivityHelper {
      *
      * @return current Activity that fragment is hosted in
      */
-    fun getActivity(fragment: Fragment?): Activity? {
+    fun getActivity(fragment: androidx.fragment.app.Fragment?): Activity? {
         var fragment = fragment ?: return null
         while (fragment.parentFragment != null) {
             fragment = fragment.parentFragment!!

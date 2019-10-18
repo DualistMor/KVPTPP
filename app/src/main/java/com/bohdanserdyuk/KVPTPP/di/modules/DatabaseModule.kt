@@ -1,16 +1,15 @@
 package com.bohdanserdyuk.KVPTPP.di.modules
 
-import android.arch.persistence.db.SupportSQLiteDatabase
-import android.arch.persistence.room.Room
-import android.arch.persistence.room.RoomDatabase
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.bohdanserdyuk.KVPTPP.R
 import com.bohdanserdyuk.KVPTPP.model.db.LocalDatabase
 import com.bohdanserdyuk.KVPTPP.model.db.ServicesDatabase
 import com.bohdanserdyuk.KVPTPP.model.db.impl.ServicesDatabaseImpl
-import com.bohdanserdyuk.KVPTPP.model.entity.ServiceData
 import com.lucky_apps.data.db.ServicesEntityDAO
 import dagger.Module
 import dagger.Provides
