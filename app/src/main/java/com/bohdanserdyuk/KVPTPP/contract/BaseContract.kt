@@ -157,7 +157,7 @@ interface BaseContract {
     interface PaymentPresenter : Presenter<PaymentView> {
         fun onCreateView()
 
-        fun pageFinished(usersPattern: String, jsPattern: String)
+        fun pageFinished(vararg patterns: String)
     }
 
     interface PaymentModel : Models

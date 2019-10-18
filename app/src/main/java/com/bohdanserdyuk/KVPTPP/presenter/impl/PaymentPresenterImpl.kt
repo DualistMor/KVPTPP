@@ -19,15 +19,17 @@ class PaymentPresenterImpl @Inject constructor(model: BaseContract.PaymentModel)
         view.fillSupportActionBar(R.string.payment, true)
     }
 
-    override fun pageFinished(usersPattern: String, jsPattern: String) {
+    override fun pageFinished(vararg patterns: String) {
         val preferencesModel = getModel(PreferencesModelImpl::class.java)
         GlobalScope.launch(Dispatchers.Main) {
             view.loadPage(JsFormatterUseCase()
-                .formatJsWithUsersInfo(usersPattern,
-                    jsPattern,
+                .addFunction(patterns[0],
+                    patterns[1], ServiceDataToServiceMapper().mapServiceDataToService(getModel(ServicesModel::class.java).read(preferencesModel.selectedService)!!).money)
+                .addFunction(patterns[2],
+                    patterns[3],
                     ServiceDataToServiceMapper().mapServiceDataToService(getModel(ServicesModel::class.java).read(preferencesModel.selectedService)!!).title,
                     preferencesModel.pib
-                )
+                ).build()
             )
         }
         view.hideProgressBar()
