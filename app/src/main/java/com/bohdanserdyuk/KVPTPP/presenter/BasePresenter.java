@@ -37,7 +37,6 @@ public abstract class BasePresenter<V extends BaseContract.View, M extends BaseC
         else {
             model = modelViewModel.getModels();
         }
-        model = modelViewModel.getModels();
     }
 
     @Override

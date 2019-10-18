@@ -8,6 +8,7 @@ import com.bohdanserdyuk.KVPTPP.broker.ScrolledUp
 import com.bohdanserdyuk.KVPTPP.broker.StartPayment
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
 import com.bohdanserdyuk.KVPTPP.model.entity.mapper.ServiceDataToServiceMapper
+import com.bohdanserdyuk.KVPTPP.model.repository.PreferencesModel
 import com.bohdanserdyuk.KVPTPP.model.repository.ServicesModel
 import com.bohdanserdyuk.KVPTPP.model.repository.impl.PreferencesModelImpl
 import com.bohdanserdyuk.KVPTPP.model.repository.impl.ServicesModelImpl
@@ -24,8 +25,8 @@ class ServicesPresenterImpl @Inject constructor(model: BaseContract.ServicesMode
     lateinit var servicesModel: ServicesModel
 
     override fun onCreateView() {
-        servicesModel = getModel(ServicesModelImpl::class.java)
-        getModel(PreferencesModelImpl::class.java).isNewUser = false
+        servicesModel = getModel(ServicesModel::class.java)
+        getModel(PreferencesModel::class.java).isNewUser = false
         GlobalScope.launch(Dispatchers.Main) {
             services = ServiceDataToServiceMapper().mapServiceDataToService(servicesModel.readAll())
             view.setAdapter(services)

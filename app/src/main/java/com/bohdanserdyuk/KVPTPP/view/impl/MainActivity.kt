@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bohdanserdyuk.KVPTPP.KVPTPPAplication
@@ -40,9 +41,7 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
         nav_view.setNavigationItemSelectedListener(this)
         ViewModelProviders.of(this).get(BasePresenterViewModel::class.java).getMessageContainer().observe(this, this)
 
-        if (savedInstanceState == null) {
-            presenter.startMainFragment()
-        }
+        presenter.startMainFragment()
     }
 
     private fun resyncActionBarDrawerToggle() {
@@ -140,23 +139,25 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
         )
     }
 
-    private fun animateChangeFragment(f: androidx.fragment.app.Fragment) {
-        if (f::class.java.simpleName != getVisibleFragment()!!::class.java.simpleName) {
-            supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_from_right,
-                R.anim.slide_to_left,
-                R.anim.slide_from_left,
-                R.anim.slide_to_right)
-                .replace(R.id.container, f)
-                .addToBackStack(null)
-                .commit()
+    private fun animateChangeFragment(f: Fragment) {
+        if(getVisibleFragment() != null) {
+            if (f::class.java.simpleName != getVisibleFragment()!!::class.java.simpleName) {
+                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_from_right,
+                    R.anim.slide_to_left,
+                    R.anim.slide_from_left,
+                    R.anim.slide_to_right)
+                    .replace(R.id.container, f)
+                    .addToBackStack(null)
+                    .commit()
 
-            toolbar.setNavigationOnClickListener {
-                onBackPressed()
+                toolbar.setNavigationOnClickListener {
+                    onBackPressed()
+                }
             }
         }
     }
 
-    private fun getVisibleFragment(): androidx.fragment.app.Fragment? {
+    private fun getVisibleFragment(): Fragment? {
         val fragmentManager = this@MainActivity.supportFragmentManager
         val fragments = fragmentManager.fragments
         if (fragments != null) {
