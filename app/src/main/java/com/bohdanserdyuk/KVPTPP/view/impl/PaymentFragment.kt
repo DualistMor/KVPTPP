@@ -45,7 +45,8 @@ class PaymentFragment : BaseFragment<BaseContract.PaymentView, BaseContract.Paym
             override fun onPageFinished(view: WebView?, url: String?) {
                 Handler().postDelayed({
                     if (presenter.isViewAttached) {
-                        presenter.pageFinished(getString(R.string.js_ammount_pattern), "%s", getString(R.string.js_insert_pattern),
+                        presenter.pageFinished(getString(R.string.js_ammount_pattern),
+                            "%s", getString(R.string.js_insert_pattern),
                             getString(R.string.users_pattern)
                         )
                         super.onPageFinished(view, url)

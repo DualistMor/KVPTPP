@@ -1,6 +1,7 @@
 package com.bohdanserdyuk.KVPTPP.di.modules
 
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
+import com.bohdanserdyuk.KVPTPP.model.entity.mapper.ServiceDataToServiceMapper
 import com.bohdanserdyuk.KVPTPP.presenter.impl.*
 import dagger.Module
 import dagger.Provides
@@ -28,8 +29,8 @@ class PresentersModule {
     }
 
     @Provides
-    fun providePaymentPresenter(model: BaseContract.PaymentModel): BaseContract.PaymentPresenter {
-        return PaymentPresenterImpl(model)
+    fun providePaymentPresenter(model: BaseContract.PaymentModel, mapper: ServiceDataToServiceMapper): BaseContract.PaymentPresenter {
+        return PaymentPresenterImpl(model, mapper)
     }
 
     @Provides

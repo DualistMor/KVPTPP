@@ -10,7 +10,8 @@ import javax.inject.Singleton
     DatasourceModule::class,
     ModelsModule::class,
     PresentersModule::class,
-    HelpersModule::class])
+    HelpersModule::class,
+    MappersModule::class])
 @Singleton
 interface AppComponent {
     fun inject(activity: MainActivity)
