@@ -1,5 +1,6 @@
 package com.bohdanserdyuk.KVPTPP.presenter.impl
 
+import android.util.Log
 import com.bohdanserdyuk.KVPTPP.R
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
 import com.bohdanserdyuk.KVPTPP.model.entity.mapper.ServiceDataToServiceMapper
@@ -27,17 +28,23 @@ class PaymentPresenterImpl @Inject constructor(model: BaseContract.PaymentModel,
      */
     override fun pageFinished(vararg patterns: String) {
         GlobalScope.launch(Dispatchers.Main) {
-            val serv = mapper.mapServiceDataToService(getModel(ServicesModel::class.java).read(preferencesModel.selectedService)!!)
-            view.loadPage(JsFormatterBuilder()
-                .addFunction(patterns[0],
-                    patterns[1], serv.money)
-                .addFunction(patterns[2],
-                    patterns[3],
-                    serv.title,
-                    preferencesModel.pib
-                ).build()
-            )
+            try {
+                val serv = mapper.mapServiceDataToService(getModel(ServicesModel::class.java).read(preferencesModel.selectedService)!!)
+                view.loadPage(JsFormatterBuilder()
+                    .addFunction(patterns[0],
+                        patterns[1], serv.money)
+                    .addFunction(patterns[2],
+                        patterns[3],
+                        serv.title,
+                        preferencesModel.pib
+                    ).build()
+                )
+            } catch (e: Exception) {
+                Log.e("PaymentPresenterImpl", "view was detached")
+            }
         }
-        view.hideProgressBar()
+        if (isViewAttached) {
+            view.hideProgressBar()
+        }
     }
 }

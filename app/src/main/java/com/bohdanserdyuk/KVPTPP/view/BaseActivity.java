@@ -3,7 +3,7 @@ package com.bohdanserdyuk.KVPTPP.view;
 import android.os.Bundle;
 
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract;
-import com.lucky_apps.RainViewer.viewLayer.viewModel.BasePresenterViewModel;
+import com.bohdanserdyuk.KVPTPP.viewModel.BasePresenterViewModel;
 
 import javax.inject.Inject;
 
@@ -37,9 +37,7 @@ public abstract class BaseActivity<V extends BaseContract.View, P extends BaseCo
     }
 
     @Override
-    public void fillSupportActionBar(int stringId, boolean isBackArrow) {
-
-    }
+    public void fillSupportActionBar(int stringId, boolean isBackArrow) {}
 
     @Override
     public LifecycleRegistry getLifecycle() {

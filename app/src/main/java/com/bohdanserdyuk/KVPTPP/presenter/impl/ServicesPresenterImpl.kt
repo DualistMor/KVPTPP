@@ -47,12 +47,16 @@ class ServicesPresenterImpl @Inject constructor(model: BaseContract.ServicesMode
         view.sendMessage(StartPayment())
     }
 
-    @OnLifecycleEvent(value = Lifecycle.Event.ON_PAUSE)
-    fun onPause() {
+    override fun saveServices() {
         GlobalScope.launch(Dispatchers.Main) {
             services.forEach {
                 servicesModel.update(ServiceDataToServiceMapper().mapServiceToServiceData(it))
             }
         }.start()
+    }
+
+    @OnLifecycleEvent(value = Lifecycle.Event.ON_PAUSE)
+    fun onPause() {
+        saveServices()
     }
 }

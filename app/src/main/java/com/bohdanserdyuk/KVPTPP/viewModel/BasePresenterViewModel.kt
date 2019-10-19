@@ -1,4 +1,4 @@
-package com.lucky_apps.RainViewer.viewLayer.viewModel
+package com.bohdanserdyuk.KVPTPP.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -23,14 +23,14 @@ class DatabaseModule {
     @Provides
     fun provideLocalDatabase(context: Context): LocalDatabase {
         return Room.databaseBuilder(context,
-            LocalDatabase::class.java, "database").addCallback(object : RoomDatabase.Callback() {
+            LocalDatabase::class.java, "database").fallbackToDestructiveMigration().addCallback(object : RoomDatabase.Callback() {
             override fun onCreate(db: SupportSQLiteDatabase) {
                 super.onCreate(db)
                 context.resources.getStringArray(R.array.services_array).forEachIndexed { index, s ->
                     val values = ContentValues()
                     values.put("id", index)
                     values.put("title", s)
-                    values.put("money", 0)
+                    values.put("amount", 0)
                     db.insert("serviceData", SQLiteDatabase.CONFLICT_REPLACE, values)
                 }
             }

@@ -61,9 +61,7 @@ public abstract class BasePresenter<V extends BaseContract.View, M extends BaseC
     }
 
     @Override
-    final public void attachLifecycle(Lifecycle lifecycle) {
-        lifecycle.addObserver(this);
-    }
+    final public void attachLifecycle(Lifecycle lifecycle) { lifecycle.addObserver(this); }
 
     @Override
     final public void detachLifecycle(Lifecycle lifecycle) {

@@ -46,6 +46,8 @@ interface BaseContract {
      * Main screen contract
      */
     interface MainView : View {
+        fun toggleNavigationDrawer(v: Boolean)
+
         fun animateChangeFragment(id: Int)
 
         fun launchMainWebsite()
@@ -55,8 +57,6 @@ interface BaseContract {
         fun startPayment()
 
         fun shareApp()
-
-        fun startMainFragment(id: Int)
 
         fun showFab()
 
@@ -140,6 +140,8 @@ interface BaseContract {
         fun scrolledDown()
 
         fun scrolledUp()
+
+        fun saveServices()
     }
 
     interface ServicesModel : Models

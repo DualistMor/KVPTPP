@@ -24,7 +24,7 @@ class MainPresenterImpl @Inject constructor(model: BaseContract.MainModel) : Bas
     }
 
     override fun startMainFragment() {
-        view.startMainFragment(R.id.nav_services)
+        view.animateChangeFragment(R.id.nav_services)
     }
 
     override fun startPayment() {

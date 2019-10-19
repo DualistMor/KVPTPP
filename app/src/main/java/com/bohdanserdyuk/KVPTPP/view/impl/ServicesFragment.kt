@@ -15,8 +15,9 @@ import com.bohdanserdyuk.KVPTPP.contract.BaseContract
 import com.bohdanserdyuk.KVPTPP.presenter.entity.Service
 import com.bohdanserdyuk.KVPTPP.view.BaseFragment
 import com.bohdanserdyuk.KVPTPP.view.adapters.ServicesRecyclerAdapter
-import com.lucky_apps.RainViewer.viewLayer.viewModel.BasePresenterViewModel
+import com.bohdanserdyuk.KVPTPP.viewModel.BasePresenterViewModel
 import kotlinx.android.synthetic.main.fragment_services.view.*
+
 
 class ServicesFragment : BaseFragment<BaseContract.ServicesView, BaseContract.ServicesPresenter>(), BaseContract.ServicesView {
 
@@ -25,7 +26,6 @@ class ServicesFragment : BaseFragment<BaseContract.ServicesView, BaseContract.Se
     override fun onCreate(savedInstanceState: Bundle?) {
         (activity!!.application as KVPTPPAplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

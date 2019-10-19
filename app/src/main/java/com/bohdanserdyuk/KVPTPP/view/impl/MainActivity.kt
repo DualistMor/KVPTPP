@@ -8,6 +8,7 @@ import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bohdanserdyuk.KVPTPP.KVPTPPAplication
@@ -18,9 +19,10 @@ import com.bohdanserdyuk.KVPTPP.broker.StartPayment
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
 import com.bohdanserdyuk.KVPTPP.view.BaseActivity
 import com.google.android.material.navigation.NavigationView
-import com.lucky_apps.RainViewer.viewLayer.viewModel.BasePresenterViewModel
+import com.bohdanserdyuk.KVPTPP.viewModel.BasePresenterViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import androidx.drawerlayout.widget.DrawerLayout
 
 
 class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresenter>(),
@@ -28,6 +30,8 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
     NavigationView.OnNavigationItemSelectedListener,
     View.OnClickListener,
     Observer<Any> {
+
+    lateinit var toggle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as KVPTPPAplication).appComponent.inject(this)
@@ -45,62 +49,33 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
     }
 
     private fun resyncActionBarDrawerToggle() {
-        val toggle = ActionBarDrawerToggle(this,
+        toggle = ActionBarDrawerToggle(this,
             drawer_layout,
             toolbar,
             R.string.navigation_drawer_open,
             R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
+        toggleNavigationDrawer(true)
         toggle.syncState()
     }
 
-    override fun onChanged(t: Any?) {
-        when (t) {
-            is StartPayment -> presenter.startPayment()
-            is ScrolledDown -> presenter.scrolledDown()
-            is ScrolledUp -> presenter.scrolledUp()
-        }
+    override fun showFab() = floatingActionButton.show()
+
+    override fun hideFab() = floatingActionButton.hide()
+
+    override fun toggleNavigationDrawer(v: Boolean) {
+        val lockMode = if (v) DrawerLayout.LOCK_MODE_UNLOCKED else DrawerLayout.LOCK_MODE_LOCKED_CLOSED
+        drawer_layout.setDrawerLockMode(lockMode)
+        toggle.isDrawerIndicatorEnabled = v
     }
-
-    override fun showFab() {
-        if (floatingActionButton.visibility != View.VISIBLE) {
-            floatingActionButton.show()
-        }
-    }
-
-    override fun hideFab() {
-        if (floatingActionButton.visibility == View.VISIBLE) {
-            floatingActionButton.hide()
-        }
-    }
-
-    override fun startMainFragment(id: Int) {
-        supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_from_right,
-            R.anim.slide_to_left,
-            R.anim.slide_from_left,
-            R.anim.slide_to_right)
-            .replace(R.id.container, ServicesFragment())
-            .commit()
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
-        } else {
-            supportActionBar?.setDisplayHomeAsUpEnabled(false)
-            supportActionBar?.setHomeButtonEnabled(false)
-            resyncActionBarDrawerToggle()
-
-            supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
-        }
-    }
-
-    override fun onClick(v: View?) = presenter.itemSelected(floatingActionButton.id)
 
     override fun launchMainWebsite() {
         startActivity(Intent(Intent.ACTION_VIEW,
             Uri.parse(getString(R.string.main_website))))
+    }
+
+    override fun startPayment() {
+        animateChangeFragment(PaymentFragment(), true)
     }
 
     override fun sendFeedback() {
@@ -122,56 +97,55 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
     override fun animateChangeFragment(id: Int) {
         animateChangeFragment(
             when (id) {
-                floatingActionButton.id -> {
-                    SettingsFragment()
-                }
-                R.id.nav_request -> {
-                    RequestFragment()
-                }
-                R.id.nav_services -> {
-                    ServicesFragment()
-                }
-                R.id.nav_about_us -> {
-                    AboutFragment()
-                }
-                else -> SettingsFragment()
+                floatingActionButton.id -> SettingsFragment()
+                R.id.nav_request -> RequestFragment()
+                R.id.nav_services -> ServicesFragment()
+                R.id.nav_about_us -> AboutFragment()
+                else -> ServicesFragment()
             }
-        )
+            , id != R.id.nav_services)
     }
 
-    private fun animateChangeFragment(f: Fragment) {
-        if(getVisibleFragment() != null) {
-            if (f::class.java.simpleName != getVisibleFragment()!!::class.java.simpleName) {
-                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_from_right,
-                    R.anim.slide_to_left,
-                    R.anim.slide_from_left,
-                    R.anim.slide_to_right)
-                    .replace(R.id.container, f)
-                    .addToBackStack(null)
-                    .commit()
+    private fun animateChangeFragment(f: Fragment, addToStack: Boolean) {
+        if (getVisibleFragment() == null || f::class.java.simpleName != getVisibleFragment()!!::class.java.simpleName) {
+            val trans = supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_from_right,
+                R.anim.slide_to_left,
+                R.anim.slide_from_left,
+                R.anim.slide_to_right)
+                .replace(R.id.container, f)
 
+            if (addToStack) {
+                trans.addToBackStack(null)
                 toolbar.setNavigationOnClickListener {
                     onBackPressed()
                 }
+                toggleNavigationDrawer(false)
             }
+            trans.commit()
         }
     }
 
-    private fun getVisibleFragment(): Fragment? {
-        val fragmentManager = this@MainActivity.supportFragmentManager
-        val fragments = fragmentManager.fragments
-        if (fragments != null) {
-            for (fragment in fragments) {
-                if (fragment != null && fragment.isVisible)
-                    return fragment
-            }
+    override fun onChanged(t: Any?) {
+        when (t) {
+            is StartPayment -> presenter.startPayment()
+            is ScrolledDown -> presenter.scrolledDown()
+            is ScrolledUp -> presenter.scrolledUp()
         }
-        return null
     }
 
-    override fun startPayment() {
-        animateChangeFragment(PaymentFragment())
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout.closeDrawer(GravityCompat.START)
+        } else {
+            supportActionBar?.setDisplayHomeAsUpEnabled(false)
+            supportActionBar?.setHomeButtonEnabled(false)
+            resyncActionBarDrawerToggle()
+            supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        }
     }
+
+    override fun onClick(v: View?) = presenter.itemSelected(floatingActionButton.id)
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -196,5 +170,18 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
         }
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+
+    private fun getVisibleFragment(): Fragment? {
+        val fragmentManager = this@MainActivity.supportFragmentManager
+        val fragments = fragmentManager.fragments
+        if (fragments != null) {
+            for (fragment in fragments) {
+                if (fragment != null && fragment.isVisible)
+                    return fragment
+            }
+        }
+        return null
     }
 }
