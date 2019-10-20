@@ -46,9 +46,9 @@ interface BaseContract {
      * Main screen contract
      */
     interface MainView : View {
-        fun toggleNavigationDrawer(v: Boolean)
+        fun animateChangeFragment(id: Int, addToStack: Boolean)
 
-        fun animateChangeFragment(id: Int)
+        fun toggleNavigationDrawer(v: Boolean)
 
         fun launchMainWebsite()
 
@@ -61,6 +61,8 @@ interface BaseContract {
         fun showFab()
 
         fun hideFab()
+
+        fun initializeActivity()
     }
 
     interface MainPresenter : Presenter<MainView> {

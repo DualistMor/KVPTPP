@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
@@ -18,11 +19,10 @@ import com.bohdanserdyuk.KVPTPP.broker.ScrolledUp
 import com.bohdanserdyuk.KVPTPP.broker.StartPayment
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract
 import com.bohdanserdyuk.KVPTPP.view.BaseActivity
-import com.google.android.material.navigation.NavigationView
 import com.bohdanserdyuk.KVPTPP.viewModel.BasePresenterViewModel
+import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import androidx.drawerlayout.widget.DrawerLayout
 
 
 class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresenter>(),
@@ -31,20 +31,21 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
     View.OnClickListener,
     Observer<Any> {
 
-    lateinit var toggle: ActionBarDrawerToggle
+    private lateinit var toggle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as KVPTPPAplication).appComponent.inject(this)
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+    }
 
+    override fun initializeActivity() {
         setSupportActionBar(toolbar)
         floatingActionButton.setOnClickListener(this)
         resyncActionBarDrawerToggle()
         nav_view.setNavigationItemSelectedListener(this)
         ViewModelProviders.of(this).get(BasePresenterViewModel::class.java).getMessageContainer().observe(this, this)
-
         presenter.startMainFragment()
     }
 
@@ -64,19 +65,14 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
     override fun hideFab() = floatingActionButton.hide()
 
     override fun toggleNavigationDrawer(v: Boolean) {
-        val lockMode = if (v) DrawerLayout.LOCK_MODE_UNLOCKED else DrawerLayout.LOCK_MODE_LOCKED_CLOSED
-        drawer_layout.setDrawerLockMode(lockMode)
+        drawer_layout.setDrawerLockMode(if (v) DrawerLayout.LOCK_MODE_UNLOCKED else DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         toggle.isDrawerIndicatorEnabled = v
     }
 
-    override fun launchMainWebsite() {
-        startActivity(Intent(Intent.ACTION_VIEW,
-            Uri.parse(getString(R.string.main_website))))
-    }
+    override fun launchMainWebsite() = startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.main_website))))
 
-    override fun startPayment() {
-        animateChangeFragment(PaymentFragment(), true)
-    }
+
+    override fun startPayment() = animateChangeFragment(PaymentFragment(), true)
 
     override fun sendFeedback() {
         val intent = Intent(Intent.ACTION_SEND)
@@ -94,7 +90,7 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
         startActivity(Intent.createChooser(sharingIntent, ""))
     }
 
-    override fun animateChangeFragment(id: Int) {
+    override fun animateChangeFragment(id: Int, addToStack: Boolean) {
         animateChangeFragment(
             when (id) {
                 floatingActionButton.id -> SettingsFragment()
@@ -103,7 +99,7 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
                 R.id.nav_about_us -> AboutFragment()
                 else -> ServicesFragment()
             }
-            , id != R.id.nav_services)
+            , addToStack)
     }
 
     private fun animateChangeFragment(f: Fragment, addToStack: Boolean) {
@@ -113,7 +109,6 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
                 R.anim.slide_from_left,
                 R.anim.slide_to_right)
                 .replace(R.id.container, f)
-
             if (addToStack) {
                 trans.addToBackStack(null)
                 toolbar.setNavigationOnClickListener {
@@ -149,24 +144,12 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.nav_services -> {
-                presenter.itemSelected(R.id.nav_services)
-            }
-            R.id.nav_request -> {
-                presenter.itemSelected(R.id.nav_request)
-            }
-            R.id.nav_about_us -> {
-                presenter.itemSelected(R.id.nav_about_us)
-            }
-            R.id.nav_website -> {
-                presenter.itemSelected(R.id.nav_website)
-            }
-            R.id.nav_feedback -> {
-                presenter.itemSelected(R.id.nav_feedback)
-            }
-            R.id.nav_share -> {
-                presenter.itemSelected(R.id.nav_share)
-            }
+            R.id.nav_services -> presenter.itemSelected(R.id.nav_services)
+            R.id.nav_request -> presenter.itemSelected(R.id.nav_request)
+            R.id.nav_about_us -> presenter.itemSelected(R.id.nav_about_us)
+            R.id.nav_website -> presenter.itemSelected(R.id.nav_website)
+            R.id.nav_feedback -> presenter.itemSelected(R.id.nav_feedback)
+            R.id.nav_share -> presenter.itemSelected(R.id.nav_share)
         }
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
@@ -174,14 +157,7 @@ class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresen
 
 
     private fun getVisibleFragment(): Fragment? {
-        val fragmentManager = this@MainActivity.supportFragmentManager
-        val fragments = fragmentManager.fragments
-        if (fragments != null) {
-            for (fragment in fragments) {
-                if (fragment != null && fragment.isVisible)
-                    return fragment
-            }
-        }
+        supportFragmentManager.fragments.forEach { if (it != null && it.isVisible) return it }
         return null
     }
 }

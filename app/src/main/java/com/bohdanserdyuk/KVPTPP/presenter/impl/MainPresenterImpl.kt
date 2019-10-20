@@ -6,12 +6,18 @@ import com.bohdanserdyuk.KVPTPP.presenter.BasePresenter
 import javax.inject.Inject
 
 class MainPresenterImpl @Inject constructor(model: BaseContract.MainModel) : BasePresenter<BaseContract.MainView, BaseContract.MainModel>(model), BaseContract.MainPresenter {
+
+    override fun onCreate() {
+        super.onCreate()
+        view.initializeActivity()
+    }
+
     override fun itemSelected(id: Int) {
         when (id) {
             R.id.nav_website -> view.launchMainWebsite()
             R.id.nav_feedback -> view.sendFeedback()
             R.id.nav_share -> view.shareApp()
-            else -> view.animateChangeFragment(id)
+            else -> view.animateChangeFragment(id, true)
         }
     }
 
@@ -24,7 +30,7 @@ class MainPresenterImpl @Inject constructor(model: BaseContract.MainModel) : Bas
     }
 
     override fun startMainFragment() {
-        view.animateChangeFragment(R.id.nav_services)
+        view.animateChangeFragment(R.id.nav_services, false)
     }
 
     override fun startPayment() {

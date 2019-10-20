@@ -11,7 +11,6 @@ import com.bohdanserdyuk.KVPTPP.model.entity.mapper.ServiceDataToServiceMapper
 import com.bohdanserdyuk.KVPTPP.model.repository.PreferencesModel
 import com.bohdanserdyuk.KVPTPP.model.repository.ServicesModel
 import com.bohdanserdyuk.KVPTPP.model.repository.impl.PreferencesModelImpl
-import com.bohdanserdyuk.KVPTPP.model.repository.impl.ServicesModelImpl
 import com.bohdanserdyuk.KVPTPP.presenter.BasePresenter
 import com.bohdanserdyuk.KVPTPP.presenter.entity.Service
 import kotlinx.coroutines.Dispatchers
