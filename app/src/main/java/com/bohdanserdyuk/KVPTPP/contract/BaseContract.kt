@@ -131,6 +131,8 @@ interface BaseContract {
 
         fun itemClick(s: Service)
 
+        fun hideKeyboard()
+
         fun sendMessage(m: Any)
     }
 

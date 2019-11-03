@@ -58,6 +58,7 @@ class ServicesPresenterImpl @Inject constructor(model: BaseContract.ServicesMode
      * TODO: After issue that described in [BaseFragment] attach lifecycle observer event onPause()
      */
     override fun onPause() {
+        view.hideKeyboard()
         saveServices()
     }
 }

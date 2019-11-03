@@ -50,19 +50,17 @@ class ServicesFragment : BaseFragment<BaseContract.ServicesView, BaseContract.Se
         return v
     }
 
+    override fun hideKeyboard() = (v.servicesRecycler.adapter as ServicesRecyclerAdapter).hideKeyboard()
+
     override fun sendMessage(m: Any) {
         ViewModelProviders.of(activity!!).get(BasePresenterViewModel::class.java).sendMessage(m)
     }
 
     override fun setAdapter(list: List<Service>) {
-        v.servicesRecycler.adapter = ServicesRecyclerAdapter(this, list, layoutInflater)
+        v.servicesRecycler.adapter = ServicesRecyclerAdapter(context!!, this, list, layoutInflater)
     }
 
-    override fun <T : Activity> startActivity(c: Class<T>) {
-        startActivity(Intent(activity, c))
-    }
+    override fun <T : Activity> startActivity(c: Class<T>) = startActivity(Intent(activity, c))
 
-    override fun itemClick(s: Service) {
-        presenter.itemClick(s)
-    }
+    override fun itemClick(s: Service) = presenter.itemClick(s)
 }

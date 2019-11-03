@@ -41,7 +41,7 @@ class AboutFragment : BaseFragment<BaseContract.AboutView, BaseContract.AboutPre
 
     override fun saveToClipboard(text: CharSequence?) {
         val clipboard = activity!!.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        clipboard.primaryClip = ClipData.newPlainText("label", text)
+        clipboard.setPrimaryClip(ClipData.newPlainText("label", text))
     }
 
     override fun showToast(stringId: Int) {

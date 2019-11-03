@@ -23,6 +23,9 @@ import com.bohdanserdyuk.KVPTPP.viewModel.BasePresenterViewModel
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import android.view.inputmethod.InputMethodManager.HIDE_IMPLICIT_ONLY
+import android.app.Activity
+import android.view.inputmethod.InputMethodManager
 
 
 class MainActivity : BaseActivity<BaseContract.MainView, BaseContract.MainPresenter>(),

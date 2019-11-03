@@ -49,7 +49,7 @@ class PreferencesModelImpl(val context: Context, val pref: SharedPreferences, va
     }
 
     override fun get(k: String, def: String): String {
-        return pref.getString(k, def)
+        return pref.getString(k, def)!!
     }
 
     override fun set(k: String, v: Float) {
