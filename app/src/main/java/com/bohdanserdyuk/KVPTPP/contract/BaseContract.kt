@@ -144,6 +144,8 @@ interface BaseContract {
         fun scrolledUp()
 
         fun saveServices()
+
+        fun onPause()
     }
 
     interface ServicesModel : Models

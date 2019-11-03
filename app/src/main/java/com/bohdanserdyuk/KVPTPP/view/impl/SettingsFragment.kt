@@ -20,7 +20,7 @@ class SettingsFragment : BaseFragment<BaseContract.SettingsView, BaseContract.Se
         super.onCreate(savedInstanceState)
         addPreferencesFromResource(R.xml.preferences_screen)
 
-        var editPref: EditTextPreference = preferenceScreen.findPreference(getString(R.string.pib_key)) as EditTextPreference
+        var editPref = preferenceScreen.findPreference<EditTextPreference>(getString(R.string.pib_key)) as EditTextPreference
         editPref.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
             if (presenter.isFullNameCorrectUA(newValue.toString()))
                 true

@@ -2,21 +2,19 @@ package com.bohdanserdyuk.KVPTPP.view;
 
 import android.os.Bundle;
 
+import com.bohdanserdyuk.KVPTPP.KVPTPPAplication;
 import com.bohdanserdyuk.KVPTPP.contract.BaseContract;
 import com.bohdanserdyuk.KVPTPP.viewModel.BasePresenterViewModel;
+import com.squareup.leakcanary.RefWatcher;
 
 import javax.inject.Inject;
 
 import androidx.annotation.CallSuper;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LifecycleRegistry;
 import androidx.lifecycle.ViewModelProviders;
 
 public abstract class BaseActivity<V extends BaseContract.View, P extends BaseContract.Presenter<V>> extends AppCompatActivity implements BaseContract.View {
-
-    private final LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
-
     @Inject
     public P presenter;
 
@@ -39,15 +37,13 @@ public abstract class BaseActivity<V extends BaseContract.View, P extends BaseCo
     @Override
     public void fillSupportActionBar(int stringId, boolean isBackArrow) {}
 
-    @Override
-    public LifecycleRegistry getLifecycle() {
-        return lifecycleRegistry;
-    }
-
     @CallSuper
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        RefWatcher refWatcher = KVPTPPAplication.Companion.getRefWatcher(getApplicationContext());
+        refWatcher.watch(this);
+
         presenter.detachLifecycle(getLifecycle());
         presenter.detachView();
         presenter.detachModels();
