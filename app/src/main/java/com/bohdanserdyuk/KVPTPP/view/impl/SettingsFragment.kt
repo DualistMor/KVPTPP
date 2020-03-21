@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.preference.EditTextPreference
 import androidx.preference.Preference
 import com.bohdanserdyuk.KVPTPP.KVPTPPAplication
@@ -21,13 +20,8 @@ class SettingsFragment : BaseFragment<BaseContract.SettingsView, BaseContract.Se
         addPreferencesFromResource(R.xml.preferences_screen)
 
         var editPref = preferenceScreen.findPreference<EditTextPreference>(getString(R.string.pib_key)) as EditTextPreference
-        editPref.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
-            if (presenter.isFullNameCorrectUA(newValue.toString()))
-                true
-            else {
-                Toast.makeText(activity, getString(R.string.wrong_pib), Toast.LENGTH_LONG).show()
-                false
-            }
+        editPref.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, _ ->
+            true
         }
     }
 

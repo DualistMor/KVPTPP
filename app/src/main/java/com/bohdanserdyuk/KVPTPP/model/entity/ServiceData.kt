@@ -10,8 +10,8 @@ data class ServiceData(var title: String, var amount: Float) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
 
-    @Ignore
-    constructor(id: Int, title: String, amount: Float) : this(title, amount) {
-        this.id = id
-    }
+        @Ignore
+        constructor(id: Int, title: String, amount: Float) : this(title, amount) {
+            this.id = id
+        }
 }

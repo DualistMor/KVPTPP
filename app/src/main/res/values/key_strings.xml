@@ -1,7 +1,5 @@
 <resources>
     <string name="pib_key">pib_key</string>
-    <string name="website_key">website_key</string>
-    <string name="feedback_key">feedback_key</string>
 
     <string name="selected_service_id_key">selected_service_key</string>
 

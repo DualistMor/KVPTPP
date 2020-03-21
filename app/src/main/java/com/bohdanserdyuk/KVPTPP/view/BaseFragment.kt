@@ -19,8 +19,6 @@ import com.squareup.leakcanary.RefWatcher
 abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>> : PreferenceFragmentCompat(),
     BaseContract.View {
 
-    private val lifecycleRegistry = LifecycleRegistry(this)
-
     @Inject
     lateinit var presenter: P
 
@@ -47,10 +45,7 @@ abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>
         presenter.attachView(this as V)
 
         super.onCreate(savedInstanceState)
-        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
     }
-
-    override fun getLifecycle(): LifecycleRegistry = lifecycleRegistry
 
     override fun fillSupportActionBar(stringId: Int, isBackArrow: Boolean) {
         val actionBar = (fragmentGetActivityHelper.getActivity(this) as AppCompatActivity).supportActionBar
@@ -59,36 +54,9 @@ abstract class BaseFragment<V : BaseContract.View, P : BaseContract.Presenter<V>
         actionBar?.setHomeButtonEnabled(isBackArrow)
     }
 
-    //--------------------------------------------------------------------------
-    // region Lifecycle.
-    // TODO: this is only needed because of this bug: https://issuetracker.google.com/issues/62160522
-    // TODO: Updated: If use lower methods, it will cause memory leaks in app(waiting till issues/62160522 be completed)
-    //--------------------------------------------------------------------------
-//
-//    override fun onStart() {
-//        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_START)
-//        super.onStart()
-//    }
-//
-//    override fun onResume() {
-//        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
-//        super.onResume()
-//    }
-//
-//    override fun onPause() {
-//        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-//        super.onPause()
-//    }
-//
-//    override fun onStop() {
-//        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
-//        super.onStop()
-//    }
-
     // endregion
     @CallSuper
     override fun onDestroy() {
-        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
         super.onDestroy()
         val refWatcher = KVPTPPAplication.getRefWatcher(context!!)
         refWatcher.watch(this)

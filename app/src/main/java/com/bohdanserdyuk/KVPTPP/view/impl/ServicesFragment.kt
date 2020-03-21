@@ -28,14 +28,6 @@ class ServicesFragment : BaseFragment<BaseContract.ServicesView, BaseContract.Se
         super.onCreate(savedInstanceState)
     }
 
-    /**
-     * TODO: After issue that described in [BaseFragment] attach lifecycle observer event onPause()
-     */
-    override fun onPause() {
-        super.onPause()
-        presenter.onPause()
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         v = inflater.inflate(R.layout.fragment_services, container, false)
         v.servicesRecycler.setItemViewCacheSize(15)

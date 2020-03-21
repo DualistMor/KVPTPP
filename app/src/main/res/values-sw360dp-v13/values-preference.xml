@@ -3,7 +3,4 @@
     <bool name="config_materialPreferenceIconSpaceReserved" tools:ignore="MissingDefaultResource,PrivateResource">
         false
     </bool>
-    <dimen name="preference_category_padding_start" tools:ignore="MissingDefaultResource,PrivateResource">
-        0dp
-    </dimen>
 </resources>

@@ -112,8 +112,6 @@ interface BaseContract {
      */
     interface OnceView : View {
         fun startMainActivity()
-
-        fun showWrongPibToast()
     }
 
     interface OncePresenter : Presenter<OnceView> {
@@ -146,8 +144,6 @@ interface BaseContract {
         fun scrolledUp()
 
         fun saveServices()
-
-        fun onPause()
     }
 
     interface ServicesModel : Models
@@ -191,8 +187,6 @@ interface BaseContract {
     interface SettingsView : View
 
     interface SettingsPresenter : Presenter<SettingsView> {
-        fun isFullNameCorrectUA(toString: String): Boolean
-
         fun onCreateView()
     }
 

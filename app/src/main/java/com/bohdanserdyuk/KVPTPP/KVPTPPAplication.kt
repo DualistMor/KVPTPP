@@ -20,6 +20,7 @@ class KVPTPPAplication : Application() {
         refWatcher = LeakCanary.install(this)
         appComponent = DaggerAppComponent.builder().contextModule(ContextModule(applicationContext)).build()
     }
+
     companion object {
         fun getRefWatcher(context: Context): RefWatcher {
             val application = context.applicationContext as KVPTPPAplication
